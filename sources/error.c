@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/27 22:28:36 by yhetman          ###   ########.fr       */
+/*   Created: 2019/05/27 22:16:14 by yhetman           #+#    #+#             */
+/*   Updated: 2019/05/27 22:18:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "../includes/lem_in.h"
 
-# include "../libft/includes/libft.h"
-# include <time.h>
-# include <mlx.h>
-# include "structs.h"
-
-/*
-**		main.c
-*/
-t_list	*save_input(void);
-/*
-**		error.c
-*/
-void	read_file_error(void);
-#endif
+void	read_file_error(void)
+{
+	ft_printf("%{red} ERROR: can't read the file. %{eoc}");
+	exit(EXIT_FAILURE);
+}

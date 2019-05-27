@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/25 22:55:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/05/27 21:50:52 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,30 @@ typedef struct		s_color
 	int				b;
 	int				dec;
 }					t_color;
+
+typedef struct		s_coord
+{
+	int				x;
+	int				y;
+}					t_coord;
+
+typedef struct		s_image
+{
+	void			*image;
+	char			*ptr;
+	int				bits;
+	int				size;
+	int				end;
+}					t_image;
+
+typedef struct		s_mlx
+{
+	void			*mlx;
+	void			*win;
+	t_image			image;
+	int				win_height;
+	int				win_width;
+}					t_mlx;
 
 int					ft_display(char *argv);
 int					ft_rgb_to_int(int r, int g, int b);
