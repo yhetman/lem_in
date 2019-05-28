@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:16:14 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/27 22:18:54 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/05/28 22:02:44 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,11 @@
 void	read_file_error(void)
 {
 	ft_printf("%{red} ERROR: can't read the file. %{eoc}");
+	exit(EXIT_FAILURE);
+}
+
+void	arg_error(void)
+{
+	ft_printf("%{red} ERROR: wrong number of arguments. %{eoc}");
 	exit(EXIT_FAILURE);
 }
