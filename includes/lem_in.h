@@ -22,6 +22,8 @@
 **		main.c
 */
 t_list	*save_input(void);
+//parsing(t_list **input, t_list **temp, t_lem *lem);
+
 /*
 **		error.c
 */
