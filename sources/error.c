@@ -6,15 +6,15 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:16:14 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/28 22:02:44 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/05/31 15:51:53 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	read_file_error(void)
+void	error_manager(char *str)
 {
-	ft_printf("%{red} ERROR: can't read the file. %{eoc}");
+	ft_printf("%{red}%s%{eoc}", str);
 	exit(EXIT_FAILURE);
 }
 

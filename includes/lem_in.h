@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/28 22:02:39 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/05/31 15:52:09 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@
 **		main.c
 */
 t_list	*save_input(void);
-//parsing(t_list **input, t_list **temp, t_lem *lem);
+void    parsing(t_list **input, t_list **temp, t_lem *lem);
 
 /*
 **		error.c
 */
-void	read_file_error(void);
-void	arg_error(void);
+void	error_manager(char *str);
 #endif
