@@ -6,15 +6,36 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/31 16:02:37 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/01 17:19:18 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
+void	free_node(void *ptr, size_t size)
+{
+	ft_bzero(ptr, size);
+	ft_memdel(&ptr);
+}
+
+void	error_manager(char *str)
+{
+	ft_printf("%{red}%s%{eoc}", str);
+	exit(EXIT_FAILURE);
+}
+
+void	free_t_lem(t_lem *ptr)
+{
+	ft_memdel((void**)&ptr->start);
+	ft_memdel((void**)&ptr->end);
+	//free_rooms(&(ptr)->rooms);
+	//free_split(ptr->pipes);
+}
+
 void	in_case_of_error(t_list **temp, t_lem *lem, char *str)
 {
-	//..//
+	ft_lstdel(temp, &free_node);
+	free_t_lem(lem);
 	error_manager(str);
 }
 
