@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/01 18:30:05 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/03 14:57:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ bool	isint(const char *arg)
 	if (len > 11)
 		return (false);
 	tmp = ft_atoi(arg);
-	if ((intmax_t)INT_MAX < (intmax_t)tmp || (intmax_t)tmp < (intmax_t)INT_MIN)
+	if ((intmax_t)INT_MAX < (intmax_t)tmp
+		|| (intmax_t)tmp < (intmax_t)INT_MIN)
 		return (false);
 	if (*arg == '+' || *arg == '-')
 		arg++;
@@ -94,6 +95,12 @@ bool			count_ants(t_list **input, int *ants)
 		return (false);
 }
 
+void	count_rooms(t_list **list, t_lem *lem)
+{
+	char	type;
+	char	*str;
+}
+
 void	parsing(t_list **input, t_list **temp, t_lem *lem)
 {
 	if (!(*input))
@@ -101,6 +108,7 @@ void	parsing(t_list **input, t_list **temp, t_lem *lem)
 	if (!(count_ants(input, &lem->ants)))
 		in_case_of_error(temp, lem, "ERROR: invalid amount of ants.");
 	*input = (*input)->next;
+	count_rooms(input, lem);
 }
 
 t_list	*save_input(void)
