@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/31 15:52:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/05 22:34:13 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,26 @@
 # include "../libft/includes/libft.h"
 # include <time.h>
 # include <mlx.h>
-# include "structs.h"
+# include "../libft/includes/structs.h"
+
+typedef struct		s_room
+{
+	char			*name;
+	int				capasity;
+	char			type;
+	t_coord			c;
+	struct s_room	*next;
+}					t_room;
+
+typedef struct		s_lem
+{
+	int				start;
+	int				end;
+	int				map;
+	int				ants;
+	t_room			*rooms_list;
+	char			**pipes;
+}                   t_lem;
 
 /*
 **		main.c
