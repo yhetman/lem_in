@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/05/06 20:55:36 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/05 20:57:43 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRC_LIBFT = $(addprefix src/, $(addsuffix .c, $(LIBFT_FUNCTIONS)))
 #SRC_PRINTF = $(addprefix ft_printf/src/, $(addsuffix .c, $(PRINTF_FUNCTIONS)))
 
 HEADERS = -I./includes -I./ft_printf/includes
-HEADER_LIBFT = ./includes/libft.h ./includes/ft_printf.h
+HEADER_LIBFT = ./includes/libft.h ./includes/ft_printf.h ./includes/macros.h ./includes/structs.h
 #HEADER_PRINTF = ./ft_printf/includes/ft_printf.h
 
 EOC = \033[0m

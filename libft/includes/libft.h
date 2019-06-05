@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/05/27 21:50:52 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/05 20:54:51 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,69 +25,8 @@
 # include <time.h>
 # include <math.h>
 # include "ft_printf.h"
-
-# define RED		"\033[31m"
-# define GREEN		"\033[32m"
-# define YELLOW		"\033[33m"
-# define BLUE		"\033[34m"
-# define PURPLE		"\033[35m"
-# define CYAN		"\033[36m"
-# define EOC		"\033[0m"
-# define BUFF_SIZE	4096
-
-typedef struct		s_fdl
-{
-	int				fd;
-	char			*reste;
-	struct s_fdl	*next;
-}					t_fdl;
-
-typedef struct		s_gnl
-{
-	int				length;
-	char			*buffer;
-	t_fdl			*mew;
-	int				ret;
-}					t_gnl;
-
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
-
-typedef struct		s_color
-{
-	int				r;
-	int				g;
-	int				b;
-	int				dec;
-}					t_color;
-
-typedef struct		s_coord
-{
-	int				x;
-	int				y;
-}					t_coord;
-
-typedef struct		s_image
-{
-	void			*image;
-	char			*ptr;
-	int				bits;
-	int				size;
-	int				end;
-}					t_image;
-
-typedef struct		s_mlx
-{
-	void			*mlx;
-	void			*win;
-	t_image			image;
-	int				win_height;
-	int				win_width;
-}					t_mlx;
+# include "structs.h"
+# include "macros.h"
 
 int					ft_display(char *argv);
 int					ft_rgb_to_int(int r, int g, int b);
@@ -189,42 +128,5 @@ int					ft_strchri(char *str, int ch, int i);
 int					ft_strchri_lu(char *str, int ch, int i);
 void				ft_free_grid(char ***grid);
 int					ft_charinstr(char *str, char *search);
-
-# define LEN(x)					ft_strlen(x)
-# define NLEN(x, y)				ft_strnlen(x, y)
-
-# define MAX(a, b)				b & ((a - b) >> 31) | a & (~(a - b) >> 31)
-# define MIN(a, b)				a & ((a - b) >> 31) | b & (~(a - b) >> 31)
-# define ABS(x)					((x < 0) ? -x : x)
-# define DABS(a)				(a < 0.0f) ? -a : a
-# define POW(x)					((x) * (x))
-# define AVERAGE(x, y)			(((x) + (y)) / 2.0)
-# define STRERR					strerror
-# define COS(c)					cos(c)
-# define SIN(c)					sin(c)
-# define IS_ASCII(c)			(!(c >> 7))
-# define IS_BLANK(c)			(c == ' ' || c == '\t' || c == '\n')
-# define IS_WHITE(c)			(c == '\f' || c == '\v' || c == '\r')
-# define IS_DIGIT(c)			((unsigned int)(c - '0') < 10)
-# define IS_GRAPH(c)			((unsigned int)(c - '!') < 94)
-# define IS_LOWER(c)			((unsigned int)(c - 'a') < 26)
-# define IS_PRINT(c)			((unsigned int)(c - ' ') < 95)
-# define IS_CNTRL(c)			(!IS_PRINT(c))
-# define IS_UPPER(c)			((unsigned int)(c - 'A') < 26)
-# define IS_ALPHA(c)			(IS_LOWER(c) || IS_UPPER(c))
-# define IS_ALNUM(c)			(IS_DIGIT(c) || IS_ALPHA(c))
-# define IS_PUNCT(c)			(IS_PRINT(c) && !FT_ISALNUM(c) && c != ' ')
-# define IS_SPACE(c)			((unsigned int)(c - '\t') < 5)
-# define IS_SIGN(c)				(c == '+' || c == '-')
-# define TO_ASCII(c)			(c & 0x7F)
-# define TO_LOWER(c)			(IS_UPPER(c) ? c + ' ' : c)
-# define TO_UPPER(c)			(IS_LOWER(c) ? c - ' ' : c)
-
-# define SET_BIT(val, plc)		(val | (1 << plc))
-# define CLEAR_BIT(val, plc)	(val & (~(1 << plc)))
-# define TOGGLE_BIT(val, plc)	(val ^ (1 << plc))
-# define GET_BIT(val, plc)		((val >> plc) & 1)
-# define GET_MSB(val, datatype)	GET_BIT(val, (sizeof(datatype) * 4 - 1))
-# define GET_LSB(val)			GET_BIT(val, 0)
 
 #endif
