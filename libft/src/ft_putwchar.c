@@ -6,34 +6,19 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 14:04:36 by yhetman           #+#    #+#             */
-/*   Updated: 2018/12/29 21:04:03 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/06 16:46:57 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putwchar(wchar_t w)
-{
-	if (w >= 0 && w <= 127)
-		return (ft_wtoi_p1(w, 1));
-	else if (w >= 128 && w <= 255)
-		return (write(1, &w, 1));
-	else if (w >= 256 && w <= 2047)
-		return (ft_wtoi_p2(w, 1));
-	else if (w >= 2048 && w <= 65535)
-		return (ft_wtoi_p3(w, 1));
-	else if (w >= 65536 && w <= 2097151)
-		return (ft_wtoi_p4(w, 1));
-	return (0);
-}
-
-int	ft_wtoi_p1(wchar_t w, int fd)
+static int	ft_wtoi_p1(wchar_t w, int fd)
 {
 	write(fd, &w, 1);
 	return (1);
 }
 
-int	ft_wtoi_p2(wchar_t w, int fd)
+static int	ft_wtoi_p2(wchar_t w, int fd)
 {
 	unsigned char	*vect;
 	int				i;
@@ -48,7 +33,7 @@ int	ft_wtoi_p2(wchar_t w, int fd)
 	return (i);
 }
 
-int	ft_wtoi_p3(wchar_t w, int fd)
+static int	ft_wtoi_p3(wchar_t w, int fd)
 {
 	unsigned char	*vect;
 	int				i;
@@ -69,7 +54,7 @@ int	ft_wtoi_p3(wchar_t w, int fd)
 	return (i);
 }
 
-int	ft_wtoi_p4(wchar_t w, int fd)
+static int	ft_wtoi_p4(wchar_t w, int fd)
 {
 	unsigned char	*vect;
 	int				i;
@@ -91,4 +76,19 @@ int	ft_wtoi_p4(wchar_t w, int fd)
 		write(fd, &vect[i++], 1);
 	free(vect);
 	return (i);
+}
+
+int			ft_putwchar(wchar_t w)
+{
+	if (w >= 0 && w <= 127)
+		return (ft_wtoi_p1(w, 1));
+	else if (w >= 128 && w <= 255)
+		return (write(1, &w, 1));
+	else if (w >= 256 && w <= 2047)
+		return (ft_wtoi_p2(w, 1));
+	else if (w >= 2048 && w <= 65535)
+		return (ft_wtoi_p3(w, 1));
+	else if (w >= 65536 && w <= 2097151)
+		return (ft_wtoi_p4(w, 1));
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:12:05 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/06 16:58:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,6 @@ void	in_case_of_error(t_list **temp, t_lem *lem, char *str)
 	ft_lstdel(temp, &free_node);
 	free_t_lem(lem);
 	error_manager(str);
-}
-
-size_t	strsplen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && !IS_SPACE(str[i]))
-		i++;
-	return (i);
-}
-
-bool	isint(const char *arg)
-{
-	intmax_t	tmp;
-	size_t		len;
-
-	len = strsplen(arg);
-	if (len > 11)
-		return (false);
-	tmp = ft_atoi(arg);
-	if ((intmax_t)INT_MAX < (intmax_t)tmp
-		|| (intmax_t)tmp < (intmax_t)INT_MIN)
-		return (false);
-	if (*arg == '+' || *arg == '-')
-		arg++;
-	if (!IS_DIGIT(*arg))
-		return (false);
-	while (*arg && !IS_SPACE(*arg))
-	{
-		if (!IS_DIGIT(*arg))
-			return (false);
-		arg++;
-	}
-	return (true);
 }
 
 bool			count_ants(t_list **input, int *ants)
