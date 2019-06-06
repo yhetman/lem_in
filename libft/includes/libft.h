@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/05 22:14:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/06 16:12:36 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # include <wchar.h>
 # include <errno.h>
 # include <string.h>
-# include <sys/types.h>
 # include <time.h>
+# include <mlx.h>
 # include <math.h>
+# include <limits.h>
+# include <sys/types.h>
 # include "ft_printf.h"
 # include "structs.h"
 # include "macros.h"

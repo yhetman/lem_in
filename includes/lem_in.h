@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/05 22:34:13 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/06 16:12:03 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define LEM_IN_H
 
 # include "../libft/includes/libft.h"
-# include <time.h>
-# include <mlx.h>
 # include "../libft/includes/structs.h"
 
 typedef struct		s_room
