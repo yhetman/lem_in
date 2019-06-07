@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 17:00:52 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 05:21:09 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 int			ft_display(char *argv);
 int			ft_rgb_to_int(int r, int g, int b);
+void		ft_error_manager(char *str);
 /*
 **	function to convert different types
 */

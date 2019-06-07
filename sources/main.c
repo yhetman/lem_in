@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 05:16:51 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 05:21:55 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ void	free_node(void *ptr, size_t size)
 {
 	ft_bzero(ptr, size);
 	ft_memdel(&ptr);
-}
-
-void	error_manager(char *str)
-{
-	ft_printf("%{red}%s%{eoc}", str);
-	exit(EXIT_FAILURE);
 }
 
 void	free_t_lem(t_lem *ptr)
@@ -39,25 +33,25 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 	error_manager(str);
 }
 
-bool			count_ants(t_stdin **input, int *ants)
+int			count_ants(t_stdin **input, int *ants)
 {
 	while (((char*)(*input)->info)[0] == '#')
 	{
 		if (ft_strequ((char*)(*input)->info, "##start")
 				|| ft_strequ((char*)(*input)->info, "##end"))
-			return (false);
+			return (0);
 		(*input) = (*input)->next;
 	}
 	if (IS_INT((char*)(*input)->info))
 	{
 		*ants = ((char*)(*input)->info);
 		if (*ants >= 0)
-			return (true);
+			return (1);
 		else
-			return (false);
+			return (0);
 	}
 	else
-		return (false);
+		return (0);
 }
 
 void	count_rooms(t_stdin **list, t_lem *lem)
