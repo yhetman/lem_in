@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:16:42 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/05 20:56:01 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 07:26:52 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 # include "libft.h"
 # include "macros.h"
 
-typedef struct			s_shit
+typedef struct		s_shit
 {
-	int					len;
-	short				params;
-	short				n;
-	int					min_length;
-	int					precis;
-	int					filled;
-	int					writen;
-	int					fd;
-	int					index;
-	char				buffer[BUFF_SIZE];
-	va_list				ap;
-	char				*format;
-	unsigned			type;
-}						t_shit;
+	int				len;
+	short			params;
+	short			n;
+	int				min_length;
+	int				precis;
+	int				filled;
+	int				writen;
+	int				fd;
+	int				index;
+	char			buffer[BUFF_SIZE];
+	va_list			ap;
+	char			*format;
+	unsigned		type;
+}					t_shit;
 
 typedef struct		s_fdl
 {

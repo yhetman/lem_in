@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 05:21:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 07:41:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,11 @@ int			ft_backn_gnl(const int fd, char **line);
 **	free functions
 */
 void		ft_free_grid(char ***grid);
-
+void    	ft_free_2d_arr(void **line);
+/*
+**	graphical functions to work with mlx
+*/
+void		ft_init_image(void *mlx, t_image *image);
+double		ft_gradient(int first, int second, double percent);
+double  	ft_grad_percent(int val, int first, int second);
 #endif

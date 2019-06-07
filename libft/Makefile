@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/06/07 05:31:09 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/07 07:41:50 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ NAME = libft.a
 FLAGS = -Wall -Wextra -Werror -g3
 
 LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
-					ft_itoa ft_atoi ft_htoi ft_uintmax_base_toa \
-					ft_utoa_base ft_lstadd ft_lstiter ft_lstdel \
+					ft_itoa ft_atoi ft_htoi ft_lstadd ft_lstiter ft_lstdel \
 					ft_lstdelone ft_lstnew ft_lstmap ft_lstsort \
 					ft_putchar ft_putstr ft_putendl ft_putnbr \
 					ft_putchar_fd ft_putstr_fd ft_putendl_fd \
@@ -30,7 +29,14 @@ LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_strncpy ft_strstr ft_strnstr ft_strdup \
 					ft_str_count_char ft_strchr ft_strrchr ft_strcat \
 					ft_strncat ft_strlcat ft_strrev ft_strlen ft_strerr \
-					ft_strchri ft_strchri_lu ft_wstrsub ft_wstrncpy \
+					ft_strchri ft_wstrsub ft_wstrncpy ft_nbrlen ft_strclen \
+					ft_strnlen ft_strlen_of_word ft_wstrlen ft_memdel \
+					ft_memalloc ft_bzero ft_memchr ft_memcpy ft_memccpy \
+					ft_memcmp ft_memmove ft_memset ft_isalpha ft_isprint \
+					ft_isdigit ft_isascii ft_isalnum ft_is_integer \
+					ft_tolower ft_toupper ft_range ft_swap ft_pow \
+					get_next_line ft_backn_gnl ft_free_grid ft_init_image\
+					ft_free_2d_arr ft_gradient ft_grad_percent\
 					ft_printf	\
 					ft_buffering	\
 					ft_coloring		\

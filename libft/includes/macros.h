@@ -6,12 +6,17 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:33:32 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 07:26:15 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 #define MACROS_H
+/*
+**  definition of window's size for mlx
+*/
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 /*
 **  colors
 */
