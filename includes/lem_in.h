@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:12:03 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 05:16:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "../libft/includes/libft.h"
 # include "../libft/includes/structs.h"
+
+typedef struct		s_stdin
+{
+	void			*info;
+	size_t			info_size;
+	struct s_stdin	*next;
+}					t_stdin;
 
 typedef struct		s_room
 {
@@ -38,8 +45,8 @@ typedef struct		s_lem
 /*
 **		main.c
 */
-t_list	*save_input(void);
-void    parsing(t_list **input, t_list **temp, t_lem *lem);
+t_stdin	*save_input(void);
+void    parsing(t_stdin **input, t_stdin **temp, t_lem *lem);
 
 /*
 **		error.c

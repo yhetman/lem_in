@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:58:59 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/07 05:16:51 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ void	free_t_lem(t_lem *ptr)
 	//free_split(ptr->pipes);
 }
 
-void	in_case_of_error(t_list **temp, t_lem *lem, char *str)
+void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 {
 	ft_lstdel(temp, &free_node);
 	free_t_lem(lem);
 	error_manager(str);
 }
 
-bool			count_ants(t_list **input, int *ants)
+bool			count_ants(t_stdin **input, int *ants)
 {
-	while (((char*)(*input)->content)[0] == '#')
+	while (((char*)(*input)->info)[0] == '#')
 	{
-		if (ft_strequ((char*)(*input)->content, "##start")
-				|| ft_strequ((char*)(*input)->content, "##end"))
+		if (ft_strequ((char*)(*input)->info, "##start")
+				|| ft_strequ((char*)(*input)->info, "##end"))
 			return (false);
 		(*input) = (*input)->next;
 	}
-	if (isint((char*)(*input)->content))
+	if (IS_INT((char*)(*input)->info))
 	{
-		*ants = ft_atoi((char*)(*input)->content);
+		*ants = ((char*)(*input)->info);
 		if (*ants >= 0)
 			return (true);
 		else
@@ -60,13 +60,13 @@ bool			count_ants(t_list **input, int *ants)
 		return (false);
 }
 
-void	count_rooms(t_list **list, t_lem *lem)
+void	count_rooms(t_stdin **list, t_lem *lem)
 {
 	char	type;
 	char	*str;
 }
 
-void	parsing(t_list **input, t_list **temp, t_lem *lem)
+void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 {
 	if (!(*input))
 		in_case_of_error(temp, lem, "ERROR: wrong number of arguments.");
@@ -76,9 +76,9 @@ void	parsing(t_list **input, t_list **temp, t_lem *lem)
 	count_rooms(input, lem);
 }
 
-t_list	*save_input(void)
+t_stdin	*save_input(void)
 {
-	t_list	*input;
+	t_stdin	*input;
 	char	*line;
 	int		result;
 
@@ -96,8 +96,8 @@ t_list	*save_input(void)
 int		main(int argc, char **argv)
 {
 	t_lem	lem;
-	t_list	*input;
-	t_list	*temp;
+	t_stdin	*input;
+	t_stdin	*temp;
 
 	ft_bzero(&lem, sizeof(t_lem));
 	input = save_input();
