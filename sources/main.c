@@ -54,11 +54,7 @@ int			count_ants(t_stdin **input, int *ants)
 		return (0);
 }
 
-void	count_rooms(t_stdin **list, t_lem *lem)
-{
-	char	type;
-	char	*str;
-}
+void	count_rooms(t_stdin **list, t_lem *lem);
 
 void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 {
