@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/06/07 07:41:50 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/10 20:18:44 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,12 +61,8 @@ PRINTF_FUNCTIONS = 	ft_printf		\
 OBJ_LIBFT = $(addprefix obj/, $(addsuffix .o, $(LIBFT_FUNCTIONS)))
 SRC_LIBFT = $(addprefix src/, $(addsuffix .c, $(LIBFT_FUNCTIONS)))
 
-#OBJ_PRINTF = $(addprefix ft_printf/obj/, $(addsuffix .o, $(PRINTF_FUNCTIONS)))
-#SRC_PRINTF = $(addprefix ft_printf/src/, $(addsuffix .c, $(PRINTF_FUNCTIONS)))
-
 HEADERS = -I./includes -I./ft_printf/includes
 HEADER_LIBFT = ./includes/libft.h ./includes/ft_printf.h ./includes/macros.h ./includes/structs.h
-#HEADER_PRINTF = ./ft_printf/includes/ft_printf.h
 
 EOC = \033[0m
 GREEN = \e[38;5;132m
