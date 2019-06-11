@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/11 20:55:10 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/11 21:06:29 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,32 @@ int			count_ants(t_stdin **input, int *ants)
 		return (0);
 }
 
-void	count_rooms(t_stdin **list, t_lem *lem);
+void	count_rooms(t_stdin **list, t_lem *lem)
+{
+	char	*line;
+	bool	type;
+
+	while(*list)
+	{
+		line = (char*)((*list)->info);
+		if (!*line)
+			return ;
+		type = true;
+		if (line[0] == "#")
+		{
+			if (line[1] != "#")
+			{
+				(*list) = (*list)->next;
+				continue ;
+			}
+			else
+				define_beggining(list, &type, &line);
+		}
+		if (!room_adding(7lem, line, type))
+			return ;
+		(*list) = (*list)->next;
+	}
+}
 
 void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 {
