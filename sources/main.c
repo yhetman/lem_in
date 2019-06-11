@@ -6,17 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 05:21:55 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/11 20:55:10 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	free_node(void *ptr, size_t size)
-{
-	ft_bzero(ptr, size);
-	ft_memdel(&ptr);
-}
 
 void	free_t_lem(t_lem *ptr)
 {
@@ -28,7 +22,7 @@ void	free_t_lem(t_lem *ptr)
 
 void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 {
-	ft_lstdel(temp, &free_node);
+	ft_lstdel(temp, &ft_free_node);
 	free_t_lem(lem);
 	error_manager(str);
 }

@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/06/10 20:18:44 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/11 20:53:13 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_isdigit ft_isascii ft_isalnum ft_is_integer \
 					ft_tolower ft_toupper ft_range ft_swap ft_pow \
 					get_next_line ft_backn_gnl ft_free_grid ft_init_image\
-					ft_free_2d_arr ft_gradient ft_grad_percent\
+					ft_free_2d_arr ft_gradient ft_grad_percent ft_free_node\
 					ft_printf	\
 					ft_buffering	\
 					ft_coloring		\
