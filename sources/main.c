@@ -6,18 +6,23 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/13 14:14:52 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/13 15:29:01 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+
+/*
+**			ERROR MANAGER
+*/
 
 void	free_t_lem(t_lem *ptr)
 {
 	ft_memdel((void**)&ptr->start);
 	ft_memdel((void**)&ptr->end);
 	//free_rooms(&(ptr)->rooms);
-	//free_split(ptr->pipes);
+	ft_free_2d_arr(ptr->pipes);
 }
 
 void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
@@ -26,6 +31,12 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 	free_t_lem(lem);
 	error_manager(str);
 }
+
+
+/*
+**			COUNTING ANTS
+*/
+
 
 int			count_ants(t_stdin **input, int *ants)
 {
@@ -48,17 +59,140 @@ int			count_ants(t_stdin **input, int *ants)
 		return (0);
 }
 
+
+
+/*
+**			VALIDARION OF ROOMS (NAMES + COORDINATES)
+*/
+
+
+
+bool	valid_coord(char **line)
+{
+	while (IS_DIGIT(**line))
+		(*line)--;
+	if (**line == '-' || **line == '+')
+		(*line)--;
+	(*line)++;
+	while (!(IS_INT(*line)))
+		return(false);
+	(*line)--;
+	if (**line != ' ')
+		return (false);
+	return (true);
+}
+
+bool	wrong_name(char *line)
+{
+	if (line[0] == 'L' || line[0] == '#')
+		return (false);
+	line += LEN(line) - 1;
+	if (!valid_coord(&line))
+		return (false);
+	line--;
+	if (!valid_coord(&line))
+		return (false);
+	return (true);
+}
+
+char	*get_name(char *line)
+{
+	size_t	i;
+	char	*room;
+
+	i = LEN(line);
+	if (wrong_name(line))
+	{
+		while (!(IS_SPACE(line[i])))
+			i--;
+		i--;
+		while (!(IS_SPACE(line[i])))
+			i--;
+		room = ft_strnew(i);
+		room = ft_strncpy(room, line, i);
+		if (ft_strchr(room, '-'))
+		{
+			ft_strdel (&room);
+			return (NULL);
+		}
+		else
+			return(room);		
+	}
+	else
+		return (NULL);
+}
+
+t_coord	get_coordinates(char *line)
+{
+	int		i;
+	char	**coords;
+	t_coord	c;
+
+	ft_bzero((void*)&i, sizeof(int));
+	ft_bzero((void*)&c, sizeof(t_coord));
+	coords = ft_strsplit(line, ' ');
+	while(coords[i])
+		i++;
+	if (i > 3)
+	{
+		c.x = ft_atoi(coords[i - 3]);
+		c.y = ft_atoi(coords[i - 2]);
+	}
+	ft_free_2d_arr((void**)coords);
+	return (c);
+}
+
+
+/*
+**			COUNTING ROOMS (FINDS OUT WHERE'S THE START AND END),
+**			VALID ROOMS ARE ADDED TO THE LIST
+**			OTHERWISE THE ERROR'S OCURRED
+*/
+
+
+
+bool	room_adding(t_lem **lem, char *line, int type)
+{
+	t_room	*new;
+	char	*name;
+	t_coord	c;
+
+	name = get_name(line);
+	if(!name)
+	{
+		ft_strdel(&name);
+		return (false);
+	}
+	c = get_coordinates(line);
+
+}
+
+void	define_beggining(t_stdin **list, int *type, char **line)
+{
+	if (!ft_strcmp(*line, "##strart"))
+		*type = 2;
+	else if (!ft_strcmp(*line, "##end"))
+		*type = 3;
+	(*list) = (*list)->next;
+	*line = (char*)((*list)->info);
+	while (line[0] == "#")
+	{
+		(*list) = (*list)->next;
+		*line = (char*)((*list)->info);
+	}
+}
+
 void	count_rooms(t_stdin **list, t_lem *lem)
 {
 	char	*line;
-	bool	type;
+	int	type;
 
 	while(*list)
 	{
 		line = (char*)((*list)->info);
 		if (!*line)
 			return ;
-		type = true;
+		type = 1;
 		if (line[0] == "#")
 		{
 			if (line[1] != "#")
@@ -75,6 +209,14 @@ void	count_rooms(t_stdin **list, t_lem *lem)
 	}
 }
 
+
+
+/*
+**			!!!!!BEGGINING OF THE PARSING!!!!!
+*/
+
+
+
 void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 {
 	if (!(*input))
@@ -84,6 +226,13 @@ void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 	*input = (*input)->next;
 	count_rooms(input, lem);
 }
+
+
+
+/*
+**			READING FROM THE STDIN
+*/
+
 
 t_stdin	*save_input(void)
 {
@@ -97,10 +246,17 @@ t_stdin	*save_input(void)
 	{
 		if (result == 1 || !IS_ASCII(line[0]))
 			error_manager("ERROR: can't read the file");
-		ft_lstadd(&input, ft_lstnew(line, sizeof(char) * (ft_strlen(line) + 1)));
+		ft_lstadd(&input, ft_lstnew(line, sizeof(char) * (LEN(line) + 1)));
 	}
 	return (input);
 }
+
+
+
+/*
+**			MAIN FUNCTION ITSELF
+*/
+
 
 int		main(int argc, char **argv)
 {
