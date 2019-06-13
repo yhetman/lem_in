@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/13 15:08:26 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/13 20:28:53 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct		s_stdin
 {
-	void			*info;
+	char			*info;
 	size_t			info_size;
 	struct s_stdin	*next;
 }					t_stdin;

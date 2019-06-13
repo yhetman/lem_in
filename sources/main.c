@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/13 16:18:36 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/13 20:38:45 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,92 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 }
 
 /*
+**			READING AND INITIALIZATION OF PIPES
+*/
+
+bool		pipes_is_vald(t_stdin **input, char ***array, t_lem *lem)
+{
+	int	linker[2];
+
+}
+
+void		get_and_init_pipes(t_lem *lem, t_stdin **input)
+{
+	t_room	*temp;
+	char	**arr;
+	int		i;
+
+	temp = lem->rooms_list;
+	i = 0;
+	while (lem->rooms_list)
+	{
+		lem->pipes[i][i] = lem->rooms_list->type;
+		i++;
+		lem->rooms_list = lem->rooms_list->next;
+	}
+	lem->rooms_list = temp;
+	while (input)
+	{
+		if (((*input)->info)[0] == '#')
+		{
+			(*input) = (*input)->next;
+			continue ;
+		}
+		arr = ft_strsplit((*input)->info, '-');
+		if (!pipes_is_valid(input, &arr, lem))
+			break ;
+		*input = (*input)->next;
+		ft_free_2d_arr(arr);
+	}
+}
+
+/*
 **			COUNTING PIPES
 */
 
+int			get_destination(char **array, int dest)
+{
+	int		i;
+
+	i = 0;
+	while (array[i][i] != dest)
+		i++;
+	return (i);
+}
+
+int			rooms_length(t_room *list)
+{
+	int	i;
+
+	i = 0;
+	while (list && ++i)
+		list = list->next;
+	return (i);
+}
 
 bool		count_pipes(t_stdin **input, t_lem *lem)
 {
-	// to be continued....
+	int		i;
+	int		amount;
+	bool	uno_link;
+
+	i = 0;
+	uno_link = false;
+	amount = rooms_length(lem->rooms_list);
+	lem->pipes = ft_memalloc(sizeof(char*) * (amount +1));
+	while (i < amount)
+	{
+		lem->pipes[i] = ft_memalloc(sizeof(char*) * (amount +1));
+		ft_memset(lem->pipes[i], 1, sizeof(char*) * (amount +1));
+	}
+	lem->map = amount;
+	get_and_init_pipes(lem, input);
+	lem->start = get_destination(lem->pipes, 2);
+	lem->end = get_destination(lem->end, 3);
+	while (--i >= 0 && !uno_link)
+		if (!uno_link)
+			uno_link = !(!ft_strchr(lem->pipes[i], 4));
+	return (uno_link);
 }
 
 
@@ -50,16 +129,16 @@ bool		count_pipes(t_stdin **input, t_lem *lem)
 
 int			count_ants(t_stdin **input, int *ants)
 {
-	while (((char*)(*input)->info)[0] == '#')
+	while (((*input)->info)[0] == '#')
 	{
-		if (ft_strequ((char*)(*input)->info, "##start")
-				|| ft_strequ((char*)(*input)->info, "##end"))
+		if (ft_strequ((*input)->info, "##start")
+				|| ft_strequ((*input)->info, "##end"))
 			return (0);
 		(*input) = (*input)->next;
 	}
-	if (IS_INT((char*)(*input)->info))
+	if (IS_INT((*input)->info))
 	{
-		*ants = ((char*)(*input)->info);
+		*ants = ((*input)->info);
 		if (*ants >= 0)
 			return (1);
 		else
