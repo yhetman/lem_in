@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/11 21:06:29 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/13 14:14:52 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	count_rooms(t_stdin **list, t_lem *lem)
 			else
 				define_beggining(list, &type, &line);
 		}
-		if (!room_adding(7lem, line, type))
+		if (!room_adding(&lem, line, type))
 			return ;
 		(*list) = (*list)->next;
 	}
