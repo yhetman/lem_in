@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:12:34 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:36:46 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int			ft_putwchar(wchar_t w);
 int			ft_put_uint_base(unsigned int numb, char *base);
 int			ft_put_uintmax_base(uintmax_t n, char *b);
 void		ft_put_uintmax(uintmax_t n);
+
 /*
 **	functions to operate with strings
 */
+
 void		ft_strdel(char **as);
 char		*ft_strnew(size_t size);
 char		*ft_strmap(char const *s, char (*f)(char));
@@ -147,6 +149,20 @@ int			ft_is_integer(const char *arg);
 bool		ft_isdash(char check);
 int			ft_tolower(int ch);
 int			ft_toupper(int ch);
+
+/*
+**	buffering functions
+*/
+
+void				ft_flush_buff(t_buffer *buf);
+void				ft_putchr_buff(t_buffer *buf, char c);
+void				ft_putstr_buff(t_buffer *buf, char *str);
+void				ft_repeat_buff(t_buffer *buf, char c, int n);
+void				ft_putnstr_buff(t_buffer *buf, char *str, int n);
+void				ft_putchr_buff_unicode(t_buffer *buf, wchar_t uchar);
+void				ft_putstr_buff_unicode(t_buffer *buf, wchar_t *ustr);
+void				ft_putnstr_buff_unicode(t_buffer *buf, wchar_t *ustr, int n);
+
 /*
 **	mathematical functions
 */ 

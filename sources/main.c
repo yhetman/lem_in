@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:23:27 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:51:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -470,6 +470,6 @@ int		main(int argc, char **argv)
 	input = save_input();
 	temp = input;
 	parsing(&input, &temp, &lem);//parsing of input and init_lem;
-
+	//buffering(temp);
 	return (0);
 }

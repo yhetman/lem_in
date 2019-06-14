@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:16:42 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/10 19:05:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:29:31 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ typedef struct		s_fdl
 	char			*reste;
 	struct s_fdl	*next;
 }					t_fdl;
+
+typedef struct		s_buffer
+{
+	char	step[BUFF_SIZE];
+	size_t	pos;
+	int		fd;
+	int		printed;
+}					t_buffer;
+
 
 typedef struct		s_gnl
 {
