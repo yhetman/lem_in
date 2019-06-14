@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 07:26:15 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:06:00 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 # define IS_SPACE(c)			((unsigned int)(c - '\t') < 5)
 # define IS_SIGN(c)				(c == '+' || c == '-')
 # define IS_INT(c)              ft_is_integer(c)
+# define IS_DASH(c)             ft_isdash(c)
 # define TO_ASCII(c)			(c & 0x7F)
 # define TO_LOWER(c)			(IS_UPPER(c) ? c + ' ' : c)
 # define TO_UPPER(c)			(IS_LOWER(c) ? c - ' ' : c)

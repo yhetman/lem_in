@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/11 20:52:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:12:34 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char		*ft_strdup(const char *src);
 int			ft_str_count_char(char *str, char *search);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *str, int ch);
+int			ft_strcntchr(const char *str, bool(*find)(char));
+int			ft_strcntsplt(char **str);
 char		*ft_strcat(char *dest, const char *srce);
 char		*ft_strncat(char *restrict str1,
 			const char *restrict str2, size_t n);
@@ -142,6 +144,7 @@ int			ft_isdigit(int ch);
 int			ft_isascii(int ch);
 int			ft_isalnum(int ch);
 int			ft_is_integer(const char *arg);
+bool		ft_isdash(char check);
 int			ft_tolower(int ch);
 int			ft_toupper(int ch);
 /*

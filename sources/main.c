@@ -6,12 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/13 20:38:45 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/14 20:23:27 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
 
 /*
 **			ERROR MANAGER
@@ -33,14 +32,55 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 }
 
 /*
-**			READING AND INITIALIZATION OF PIPES
+**			CHECK IF THE PIPES ARE VALID
 */
+
+
+int			knock_knock(char *name, t_room *neighbourhood)
+{
+	int		adress;
+
+	adress = 0;
+	while (neighbourhood)
+	{
+		if (!ft_strcmp(neighbourhood->name, name))
+			return (adress);
+		adress++;
+		neighbourhood = neighbourhood->next;
+	}
+	return (-1);
+}
 
 bool		pipes_is_vald(t_stdin **input, char ***array, t_lem *lem)
 {
 	int	linker[2];
 
+	if (ft_strcntchr((*input)->info, &ft_isdash) > 1
+		|| ft_strcntsplt(*array) != 2)
+	{
+		ft_free_2d_arr(*array);
+		*input = (*input)->next;
+		return (false);
+	}
+	linker[0] = knock_knock(*array[0], lem->rooms_list);
+	if (linker[0] != 1)
+		linker[1] = knock_knock(*array[1], lem->rooms_list);
+	if (linker[0] == -1 || linker[1] == -1)
+	{
+		ft_free_2d_arr(*array);
+	}
+	lem->pipes[linker[0]][linker[1]] = 4;
+	lem->pipes[linker[1]][linker[0]] = 4;
+	return (true);
 }
+
+
+
+/*
+**			READING AND INITIALIZATION OF PIPES
+*/
+
+
 
 void		get_and_init_pipes(t_lem *lem, t_stdin **input)
 {
