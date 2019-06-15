@@ -1,6 +1,6 @@
 # lem_in
 
-The project is meant to code an ant farm manager using Breadth-First Search algorithm.
+The project is meant to code an ant farm manager using Breadth-First Search in Edmons-Karp algorithm.
 
 Make an ant farm, with tunnels and rooms;
 place the ants on the one side;
