@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:51:07 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:27:26 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 	free_t_lem(lem);
 	error_manager(str);
 }
+
+/*
+**			BUFFERING
+*/
+
+void	buffering(t_stdin *input)
+{
+	t_buffer	buff;
+
+	buff.fd = 1;
+	buff.printed = 0;
+	buff.pos = 0;
+	while (input)
+	{
+		ft_putstr_buff(&buff, input->info);
+		ft_putchr_buff(&buff, '\n');
+		input = input->next;
+	}
+	ft_flush_buff(&buff);
+}
+
 
 /*
 **			CHECK IF THE PIPES ARE VALID
