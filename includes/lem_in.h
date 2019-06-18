@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:58 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/18 16:06:41 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/18 18:16:43 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_lem
 	int				end;
 	char			*start_room;
 	char			*end_room;
+	char			*insects;
 	int				map;
 	int				ants;
 	t_room			*rooms_list;

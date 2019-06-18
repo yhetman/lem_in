@@ -30,7 +30,7 @@ void            ft_putchr_buff(t_buffer *buff, char c)
 		ft_flush_buff(buff);
 }
 
-void			ft_putstr_buf(t_buffer *buf, char *str)
+void			ft_putstr_buff(t_buffer *buf, char *str)
 {
 	while (*str)
 	{
@@ -39,7 +39,7 @@ void			ft_putstr_buf(t_buffer *buf, char *str)
 	}
 }
 
-void			ft_putnstr_buf(t_buffer *buf, char *str, int n)
+void			ft_putnstr_buff(t_buffer *buf, char *str, int n)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void			ft_putnstr_buf(t_buffer *buf, char *str, int n)
 	}
 }
 
-void			ft_repeat_buf(t_buffer *buf, char c, int n)
+void			ft_repeat_buff(t_buffer *buf, char c, int n)
 {
 	while (n)
 	{

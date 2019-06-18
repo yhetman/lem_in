@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/18 16:38:52 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/18 18:38:12 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 {
 	free_t_stdin(temp, &ft_free_node);
 	free_t_lem(lem);
-	error_manager(str);
+	ft_error_manager(str);
 }
+
 
 /*
 **			BUFFERING
@@ -191,8 +192,8 @@ bool		count_pipes(t_stdin **input, t_lem *lem)
 	}
 	lem->map = amount;
 	get_and_init_pipes(lem, input);
-	lem->start_room = get_destination(lem->pipes, 2);
-	lem->end_room = get_destination(&lem->end_room, 3);
+	lem->start = get_destination(lem->pipes, 2);
+	lem->end = get_destination(&lem->end_room, 3);
 	while (--i >= 0 && !uno_link)
 		if (!uno_link)
 			uno_link = !(!ft_strchr(lem->pipes[i], 4));
@@ -216,11 +217,8 @@ int			count_ants(t_stdin **input, int *ants)
 	}
 	if (IS_INT((*input)->info))
 	{
-		*ants = ((*input)->info);
-		if (*ants >= 0)
-			return (1);
-		else
-			return (0);
+		*ants = ft_atoi((*input)->info);
+		return((*ants >= 0) ? 1 : 0);
 	}
 	else
 		return (0);
@@ -410,7 +408,7 @@ void	define_destination(t_stdin **list, int *type, char **line)
 		*type = 3;
 	(*list) = (*list)->next;
 	*line = (*list)->info;
-	while (ft_strcmp(&line[0], "#"))
+	while (*line[0] == '#')
 	{
 		(*list) = (*list)->next;
 		*line = (*list)->info;
@@ -428,9 +426,9 @@ void	count_rooms(t_stdin **list, t_lem *lem)
 		if (!*line)
 			return ;
 		type = 1;
-		if (ft_strcmp(&line[0], "#"))
+		if (line[0] == '#')
 		{
-			if (line[1] != "#")
+			if (line[1] != '#')
 			{
 				(*list) = (*list)->next;
 				continue ;
@@ -455,16 +453,16 @@ void	count_rooms(t_stdin **list, t_lem *lem)
 void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 {
 	if (!(*input))
-		in_case_of_error(temp, lem, "ERROR: wrong number of arguments.");
+		in_case_of_error(temp, lem, "ERROR: wrong number of arguments\n.");
 	if (!(count_ants(input, &lem->ants)))
-		in_case_of_error(temp, lem, "ERROR: invalid amount of ants.");
+		in_case_of_error(temp, lem, "ERROR: invalid amount of ants\n.");
 	*input = (*input)->next;
 	count_rooms(input, lem);
 	if (!lem->rooms_list || !no_destination(lem))
-		in_case_of_error(temp, lem, "ERROR: there's no beggining or end");
+		in_case_of_error(temp, lem, "ERROR: there's no beggining or end.\n");
 	if (!count_pipes(input, lem))
 		in_case_of_error(temp, lem,
-		"ERROR: some troubles with pipes, please check everything twice.");		
+		"ERROR: some troubles with pipes, please check everything twice\n.");		
 }
 
 
@@ -472,6 +470,39 @@ void	parsing(t_stdin **input, t_stdin **temp, t_lem *lem)
 /*
 **			READING FROM THE STDIN
 */
+
+t_stdin	*new_t_stdin(void const *info, size_t info_size)
+{
+	t_stdin	*new;
+
+	if (!(new = (t_stdin *)malloc(sizeof(t_stdin))))
+		return (NULL);
+	if (info == NULL)
+	{
+		new->info = NULL;
+		new->info_size = 0;
+		new->next = NULL;
+	}
+	else
+	{
+		if (!(new->info = malloc(info_size)))
+			return (NULL);
+		new->info = ft_memcpy(new->info,
+			info, info_size);
+		new->info_size = info_size;
+		new->next = NULL;
+	}
+	return (new);
+}
+
+void	add_t_stdin(t_stdin **input, t_stdin *add)
+{
+	if (input != NULL && *input != NULL && add != NULL)
+	{
+		add->next = *input;
+		*input = add;
+	}
+}
 
 
 t_stdin	*save_input(void)
@@ -485,8 +516,8 @@ t_stdin	*save_input(void)
 	while ((result = get_next_line(0, &line)))
 	{
 		if (result == 1 || !IS_ASCII(line[0]))
-			error_manager("ERROR: can't read the file");
-		ft_lstadd(&input, ft_lstnew(line, sizeof(char) * (LEN(line) + 1)));
+			ft_error_manager("ERROR: can't read the file\n");
+		add_t_stdin(&input, new_t_stdin(line, sizeof(char) * (LEN(line) + 1)));
 	}
 	return (input);
 }
@@ -497,6 +528,29 @@ t_stdin	*save_input(void)
 **			MAIN FUNCTION ITSELF
 */
 
+int		def_flags(int argc, char **argv)
+{
+	int		i;
+	int		bits;
+
+	bits = 0;
+	i = 0;
+	while (++i < argc)
+	{
+		if (ft_isflag(argv[i]) == 0)
+			return (0);
+		else if (ft_isflag(argv[i]) == 1)
+		{
+			argv[i]++;
+			while (*(argv[i]))
+			{
+				bits = bits | (1 << (*argv[i] - 'a'));
+				argv[i]++;
+			}
+		}
+	}
+	return (bits);
+}
 
 int		main(int argc, char **argv)
 {
@@ -505,9 +559,11 @@ int		main(int argc, char **argv)
 	t_stdin	*temp;
 
 	ft_bzero(&lem, sizeof(t_lem));
+	if (def_flags(argc, argv) ^ 21264)
+		lem.insects = "L";
 	input = save_input();
 	temp = input;
 	parsing(&input, &temp, &lem);//parsing of input and init_lem;
-	//buffering(temp);
+	buffering(temp);
 	return (0);
 }

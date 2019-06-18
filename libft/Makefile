@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/06/14 20:50:38 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/18 18:30:49 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_memcmp ft_memmove ft_memset ft_isalpha ft_isprint ft_put_buff\
 					ft_isdigit ft_isascii ft_isalnum ft_is_integer ft_isdash\
 					ft_tolower ft_toupper ft_range ft_swap ft_pow ft_put_buff_unicode\
-					get_next_line ft_backn_gnl ft_free_grid ft_init_image\
-					ft_free_2d_arr ft_gradient ft_grad_percent ft_free_node\
+					get_next_line ft_backn_gnl ft_free_grid ft_init_image ft_isflag\
+					ft_free_2d_arr ft_gradient ft_grad_percent ft_free_node ft_strcntchr\
 					ft_printf	\
 					ft_buffering	\
 					ft_coloring		\
