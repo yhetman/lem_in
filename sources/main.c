@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/17 16:27:26 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/06/18 16:38:52 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,34 @@
 **			ERROR MANAGER
 */
 
+void	free_t_stdin(t_stdin **input, void (*del)(void*, size_t))
+{
+	t_stdin	*tempo;
+
+	if (!del || !input || !*input)
+		return ;
+	while (*input)
+	{
+		tempo = (*input)->next;
+		del((*input)->info, (*input)->info_size);
+		free(*input);
+		*input = tempo;
+	}
+	*input = NULL;
+	return ;
+}
+
 void	free_t_lem(t_lem *ptr)
 {
 	ft_memdel((void**)&ptr->start);
 	ft_memdel((void**)&ptr->end);
 	//free_rooms(&(ptr)->rooms);
-	ft_free_2d_arr(ptr->pipes);
+	ft_free_2d_arr((void**)ptr->pipes);
 }
 
 void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 {
-	ft_lstdel(temp, &ft_free_node);
+	free_t_stdin(temp, &ft_free_node);
 	free_t_lem(lem);
 	error_manager(str);
 }
@@ -72,14 +89,14 @@ int			knock_knock(char *name, t_room *neighbourhood)
 	return (-1);
 }
 
-bool		pipes_is_vald(t_stdin **input, char ***array, t_lem *lem)
+bool		pipes_is_valid(t_stdin **input, char ***array, t_lem *lem)
 {
 	int	linker[2];
 
 	if (ft_strcntchr((*input)->info, &ft_isdash) > 1
 		|| ft_strcntsplt(*array) != 2)
 	{
-		ft_free_2d_arr(*array);
+		ft_free_2d_arr((void**)*array);
 		*input = (*input)->next;
 		return (false);
 	}
@@ -88,7 +105,7 @@ bool		pipes_is_vald(t_stdin **input, char ***array, t_lem *lem)
 		linker[1] = knock_knock(*array[1], lem->rooms_list);
 	if (linker[0] == -1 || linker[1] == -1)
 	{
-		ft_free_2d_arr(*array);
+		ft_free_2d_arr((void**)*array);
 	}
 	lem->pipes[linker[0]][linker[1]] = 4;
 	lem->pipes[linker[1]][linker[0]] = 4;
@@ -129,7 +146,7 @@ void		get_and_init_pipes(t_lem *lem, t_stdin **input)
 		if (!pipes_is_valid(input, &arr, lem))
 			break ;
 		*input = (*input)->next;
-		ft_free_2d_arr(arr);
+		ft_free_2d_arr((void**)arr);
 	}
 }
 
@@ -174,8 +191,8 @@ bool		count_pipes(t_stdin **input, t_lem *lem)
 	}
 	lem->map = amount;
 	get_and_init_pipes(lem, input);
-	lem->start = get_destination(lem->pipes, 2);
-	lem->end = get_destination(lem->end, 3);
+	lem->start_room = get_destination(lem->pipes, 2);
+	lem->end_room = get_destination(&lem->end_room, 3);
 	while (--i >= 0 && !uno_link)
 		if (!uno_link)
 			uno_link = !(!ft_strchr(lem->pipes[i], 4));
@@ -288,7 +305,7 @@ t_coord	get_coordinates(char *line)
 		c.x = ft_atoi(coords[i - 3]);
 		c.y = ft_atoi(coords[i - 2]);
 	}
-	ft_free_2d_arr((void**)coords);
+	ft_free_2d_arr((void**)(void**)coords);
 	return (c);
 }
 
@@ -336,7 +353,7 @@ bool	save_destination(t_lem *lem, char *name, int type)
 			ft_memdel((void**)&name);
 			return (false);
 		}
-		lem->start = ft_strdup(name);
+		lem->start_room = ft_strdup(name);
 	}
 	else if (type == 3)
 	{
@@ -345,7 +362,7 @@ bool	save_destination(t_lem *lem, char *name, int type)
 			ft_memdel((void**)&name);
 			return (false);
 		}
-		lem->end = ft_strdup(name);
+		lem->end_room = ft_strdup(name);
 	}
 	return (true);
 }
@@ -392,11 +409,11 @@ void	define_destination(t_stdin **list, int *type, char **line)
 	else if (!ft_strcmp(*line, "##end"))
 		*type = 3;
 	(*list) = (*list)->next;
-	*line = (char*)((*list)->info);
-	while (line[0] == "#")
+	*line = (*list)->info;
+	while (ft_strcmp(&line[0], "#"))
 	{
 		(*list) = (*list)->next;
-		*line = (char*)((*list)->info);
+		*line = (*list)->info;
 	}
 }
 
@@ -411,7 +428,7 @@ void	count_rooms(t_stdin **list, t_lem *lem)
 		if (!*line)
 			return ;
 		type = 1;
-		if (line[0] == "#")
+		if (ft_strcmp(&line[0], "#"))
 		{
 			if (line[1] != "#")
 			{

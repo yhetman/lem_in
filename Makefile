@@ -6,11 +6,11 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 18:36:12 by yhetman           #+#    #+#              #
-#    Updated: 2019/06/10 20:37:16 by yhetman          ###   ########.fr        #
+#    Updated: 2019/06/18 16:04:57 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	lem_in
+NAME		:=	lem-in
 RM			:=	rm -rf
 OS			:=	$(shell uname)
 
@@ -26,7 +26,7 @@ else
 FLAGS_PLUS	= -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 endif
 
-FILES		=	main 
+FILES		=	main
 
 SRC			=	$(addprefix sources/, $(addsuffix .c, $(FILES)))
 OBJ			=	$(addprefix obj/, $(addsuffix .o, $(FILES)))
