@@ -17,7 +17,7 @@ int		ft_put_uint_base(unsigned int numb, char *base)
 	char	*str;
 	int		i;
 
-	if (numb > 4294967295)
+	if (numb > 4294967294)
 		return (ft_putchar('0'));
 	str = ft_utoa_base(numb, base);
 	i = ft_putstr(str);

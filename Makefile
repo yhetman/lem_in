@@ -20,13 +20,7 @@ HEADER		:=	-I libft/includes -I ./includes
 
 TOOLDIR		:=	./tools
 
-ifeq ($(OS), Linux)
-FLAGS_PLUS	= -L ./minilibx -lmlx -lm -lXext -lX11
-else
-FLAGS_PLUS	= -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-endif
-
-FILES		=	main
+FILES		=	main reading
 
 SRC			=	$(addprefix sources/, $(addsuffix .c, $(FILES)))
 OBJ			=	$(addprefix obj/, $(addsuffix .o, $(FILES)))
@@ -36,41 +30,20 @@ obj/%.o: sources/%.c
 
 all: $(NAME)
 
-$(NAME): libft/libft.a mlx $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -I /usr/local/include -L /usr/local/lib \
-	-lmlx libft/libft.a -framework OpenGL -framework AppKit
+$(NAME): libft/libft.a $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -I /usr/local/include -L /usr/local/lib libft/libft.a
 
 libft/libft.a:
 	make -C libft
 
-ifeq ($(OS), Linux)
-mlx:
-	make -C minilibx
-else
-mlx:
-	make -C minilibx_macos
-endif
-
-
-clean: clean_mlx
+clean: 
 	make -C libft clean
 	@rm -rf $(OBJ)
 
-ifeq ($(OS), Linux)
-clean_mlx:
-	make -C minilibx clean
-else
-clean_mlx:
-	make -C minilibx_macos clean
-endif
-
-fclean: clean_mlx
+fclean:
 	make -C libft fclean
-	rm -rf $(OBJ)
-	rm -rf $(NAME)
-
-
-re: fclean all
+	@rm -rf $(NAME)
+re: fclean  all
 
 big: all
 	@$(RM) big.lemin big.lemin.out
@@ -118,14 +91,14 @@ one: all
 
 thousand: all
 	@$(RM) thousand.lemin thousand.lemin.out
-	@echo "\033[4mTesting --flow-thousand...\033[0m"
-	@$(TOOLDIR)/generator --flow-thousand > thousand.lemin
-	@grep -m 1 required < thousand.lemin
-	@./lem-in < thousand.lemin > thousand.lemin.out
-	@echo "vs.\t\t\t\t\t\c"
-	@grep -c L < thousand.lemin.out
-	@grep L < thousand.lemin.out | python $(TOOLDIR)/check_doubles.py
-	@echo "Output saved in \033[3mthousand.lemin.out.\033[0m\n"
-
-.PHONY: all clean fclean re
-.NOTPARALLEL: all $(NAME) libft/libft.a mlx clean clean_mlx fclean re
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/05/27 18:36:12 by yhetman           #+#    #+#              #
+#    Updated: 2019/06/18 16:04:57 by yhetman          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #

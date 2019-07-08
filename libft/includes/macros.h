@@ -59,8 +59,8 @@
 /*
 **  mathematical macros
 */
-# define MAX(a, b)				b & ((a - b) >> 31) | a & (~(a - b) >> 31)
-# define MIN(a, b)				a & ((a - b) >> 31) | b & (~(a - b) >> 31)
+# define MAX(a, b)				(b & ((a - b) >> 31)) | (a & ((~(a - b)) >> 31))
+# define MIN(a, b)				(a & ((a - b) >> 31)) | (b & ((~(a - b)) >> 31))
 # define ABS(x)					((x < 0) ? -x : x)
 # define DABS(a)				(a < 0.0f) ? -a : a
 # define POW(x)					((x) * (x))

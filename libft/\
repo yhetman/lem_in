@@ -65,10 +65,10 @@ HEADERS = -I./includes -I./ft_printf/includes
 HEADER_LIBFT = ./includes/libft.h ./includes/ft_printf.h ./includes/macros.h ./includes/structs.h
 
 EOC = \033[0m
-GREEN = \033[38;5;132m
-RED = \033[38;5;96m
-PURPLE = \33[38;5;213m
-CYAN = \033[38;5;170m
+GREEN = \e[38;5;132m
+RED = \e[38;5;96m
+PURPLE = \e[38;5;213m
+CYAN = \e[38;5;170m
 
 all: $(NAME)
 
@@ -78,7 +78,7 @@ all: $(NAME)
 OBJ_PATH = obj
 
 $(NAME): $(OBJ_PATH) $(OBJ_LIBFT) $(OBJ_PRINTF) $(HEADER_LIBFT) $(HEADER_PRINTF)
-	@echo " $(RED)>$(EOC) $(GREEN)$(NAME) is ready.$(EOC)\n"
+	@printf " $(RED)>$(EOC) $(GREEN)$(NAME) is ready.$(EOC)\n"
 	@ar rcs $(NAME) $(OBJ_LIBFT) $(OBJ_PRINTF)
 	@ranlib $(NAME)
 
@@ -87,11 +87,11 @@ $(OBJ_PATH):
 
 $(OBJ_LIBFT): obj/%.o: src/%.c $(HEADER_LIBFT)
 	@$(CC) -o $@ $(FLAGS) $(HEADERS) -c $<
-	@echo -n "$(CYAN).$(EOC)"
+	@printf "$(CYAN).$(EOC)"
 
 $(OBJ_PRINTF): ft_printf/obj/%.o: ft_printf/src/%.c $(HEADER_PRINTF)
 	@$(CC) -o $@ $(FLAGS) $(HEADERS) -c $<
-	@echo -n "$(PURPLE).$(EOC)"
+	@printf "$(PURPLE).$(EOC)"
 
 clean:
 	@rm -rf $(OBJ_LIBFT) $(OBJ_PRINTF)

@@ -36,8 +36,8 @@ void					ft_printf_itoa_base(uintmax_t n,
 void					ft_printf_itoa(intmax_t n, t_shit *print, int length);
 void					ft_printf_str(char *str, t_shit *print);
 void					ft_wstrput(t_shit *print);
-void					ft_wcharput(t_shit *print, unsigned int wc,
-						int wlength, int byte_size);
+void					ft_wcharput(t_shit *print, int wc,
+						size_t wlength, size_t byte_size);
 void					ft_strput(t_shit *print);
 void					ft_char(t_shit *print, unsigned c);
 

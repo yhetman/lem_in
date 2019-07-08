@@ -14,11 +14,9 @@
 
 int		ft_str_count_char(char *str, char *search)
 {
-	char	*temp;
 	size_t	length_search;
 	int		nb_occur;
 
-	temp = str;
 	length_search = 0;
 	nb_occur = 0;
 	length_search = ft_strlen(search);

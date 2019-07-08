@@ -24,7 +24,7 @@ void	ft_wstrput(t_shit *print)
 	{
 		wlength = (int)(ft_wstrlen((unsigned *)str));
 		(print->params & PRECIS) ? wlength = MIN(print->precis, wlength) : 0;
-		print->filled = MAX(print->min_length - wlength, 0);
+		print->filled = MAX((print->min_length - wlength), 0);
 		if (print->precis == 4 && print->min_length == 15 && wlength == 4)
 			++print->filled;
 		print->params = (print->min_length > print->precis) ?
@@ -40,7 +40,7 @@ void	ft_wstrput(t_shit *print)
 	}
 }
 
-void	ft_wcharput(t_shit *print, unsigned int wc, int wlength, int byte_size)
+void	ft_wcharput(t_shit *print, int wc, size_t wlength, size_t byte_size)
 {
 	char	tmp[4];
 

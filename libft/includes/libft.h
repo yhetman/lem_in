@@ -22,10 +22,11 @@
 # include <errno.h>
 # include <string.h>
 # include <time.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <math.h>
 # include <limits.h>
 # include <sys/types.h>
+# include <inttypes.h>
 # include "ft_printf.h"
 # include "structs.h"
 # include "macros.h"
@@ -50,7 +51,7 @@ void		ft_lstdel(t_list **alst, void(*del)(void*, size_t));
 void		ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
 t_list		*ft_lstnew(void const *content, size_t content_size);
 t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-t_list		*ft_lstsort(t_list *lst, int (*cmp)(int, int));
+//t_list		*ft_lstsort(t_list *lst, int (*cmp)(int, int));
 /*
 **	function for standard output
 */
@@ -184,7 +185,7 @@ void		ft_free_node(void *ptr, size_t size);
 /*
 **	graphical functions to work with mlx
 */
-void		ft_init_image(void *mlx, t_image *image);
+//void		ft_init_image(void *mlx, t_image *image);
 double		ft_gradient(int first, int second, double percent);
 double  	ft_grad_percent(int val, int first, int second);
 #endif

@@ -21,7 +21,7 @@ void	ft_buffering(t_shit *print, void *newest, size_t size)
 	while (BUFF_SIZE - print->index < (int)size)
 	{
 		difference = BUFF_SIZE - print->index;
-		ft_memcpy(&(print->buffer[print->index]), &(newest[i]), difference);
+		ft_memcpy(&(print->buffer[print->index]), (newest + i), difference);
 		size -= difference;
 		i += difference;
 		print->index += difference;
@@ -29,7 +29,7 @@ void	ft_buffering(t_shit *print, void *newest, size_t size)
 		write(print->fd, print->buffer, print->index);
 		print->index = 0;
 	}
-	ft_memcpy(&(print->buffer[print->index]), &(newest[i]), size);
+	ft_memcpy(&(print->buffer[print->index]), (newest + i), size);
 	print->index += size;
 	print->len += size;
 }
