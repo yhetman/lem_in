@@ -171,6 +171,8 @@ void		ft_putnstr_buff_unicode(t_buffer *buf, wchar_t *ustr, int n);
 int			*ft_range(int first, int last);
 void		ft_swap(int *a, int *b);
 double		ft_pow(double n, int power);
+int		ft_numblength(int number);
+int		ft_sqrt(int number);
 /*
 **	get_next_line
 */

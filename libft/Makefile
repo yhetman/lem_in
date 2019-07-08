@@ -35,7 +35,7 @@ LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_memcmp ft_memmove ft_memset ft_isalpha ft_isprint ft_put_buff\
 					ft_isdigit ft_isascii ft_isalnum ft_is_integer ft_isdash\
 					ft_tolower ft_toupper ft_range ft_swap ft_pow ft_put_buff_unicode\
-					get_next_line ft_backn_gnl ft_free_grid ft_isflag\
+					get_next_line ft_backn_gnl ft_free_grid ft_isflag ft_sqrt ft_numblength\
 					ft_free_2d_arr ft_gradient ft_grad_percent ft_free_node ft_strcntchr\
 					ft_printf	\
 					ft_buffering	\
