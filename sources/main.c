@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:35:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/07/04 16:05:02 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/07/10 17:53:43 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,116 @@ void	in_case_of_error(t_stdin **temp, t_lem *lem, char *str)
 	free_t_stdin(temp, &ft_free_node);
 	free_t_lem(lem);
 	ft_error_manager(str);
+}
+
+void	free_map(t_stdin **s, int size)
+{
+	int	i;
+
+	if (!map || !size)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		if (map[i])
+			del_t_stdin(&map[i], &ft_free_node);
+		i++;
+	}
+	ft_memdel((void**)&map);
+}
+
+/*
+**			SOLVATION
+*/
+
+
+t_stdin		*find_last(t_stdin *node)
+{
+	while (node && node->next)
+		node = node->next;
+	return (node);
+}
+
+void	append_the_node(t_graph node, t_stdin *new_node)
+{
+	if (new_node)
+	{
+		if (*node)
+		{
+			find_last(*node)->next = new_node;
+			new_node->next = NULL;
+		}
+		else
+		{
+			ft_lstadd(node, new_node);
+		}
+	}
+}
+
+void	connect_nodes(t_graph nodes, int counter, char *link)
+{
+	t_destination	temp;
+	int				i;
+
+	i = -1;
+	while (link[++i])
+		if (link[i] == 4)
+		{
+			fullfill_the_node(&temp, counter, i);
+			append_the_node(nodes, ft_lstnew(&temp, sizeof(t_destination)));
+		}
+}
+
+t_graph	constructor_of_graph(t_lem *lem)
+{
+	int		iter;
+	int		nodes;
+	char	**links;
+	t_graph	graph;
+
+	iter = -1
+	nodes = lem->map;
+	links = lem->pipes;
+	graph = ft_memalloc(sizeof(t_stdin*) * (nodes - 1);
+	while (++iter < nodes)
+		connect_nodes(&graph[iter], iter, links[iter]);
+	reverse_nodes(graph, nodes);
+	return (graph);
+}
+
+t_graph start_edmonds_karp(t_lem *lem)
+{
+	t_graph graph;
+	t_lem	lem_cpy;
+	int		inter;
+
+	ft_memcpy(&lem_cpy, lem, sizeof(t_lem));
+	graph = constructor_of_graph(&lem_cpy);
+	iter = edmonds_karp_algorithm(graph, &lem_cpy, -1);
+	if (!iter)
+	{
+		free_map(graph, lem_cpy->map);
+		return (NULL);
+	}
+	free_map(graph, lem_cpy->map);
+	graph = constructor_of_graph(&lem_cpy);
+	edmonds_karp_algorithm(graph, &lem_cpy, -1);
+}
+
+void	solvation(t_lem *lem)
+{
+	t_graph	string;
+
+	string = start_edmonds_karp(lem);
+	if (string && lem->flow_numb > 0)
+	{
+		ft_putchar('\n');
+		del_t_stdin(&lem->input, &ft_free_node);
+		launch_ants(string, lem);
+	}
+	else
+		ft_putstr_fd("ERROR OCCURED!\n", 2);
+	free_map(string, lem->map);
 }
 
 
@@ -509,5 +619,6 @@ int		main(int argc, char **argv)
 	temp = input;
 	parsing(&input, &temp, &lem);//parsing of input and init_lem;
 	buffering(temp);
+	solvation(&lem);
 	return (0);
 }

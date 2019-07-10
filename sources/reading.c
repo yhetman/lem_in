@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 16:04:02 by yhetman           #+#    #+#             */
-/*   Updated: 2019/07/04 16:04:53 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:57:05 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,28 @@
 /*
 **			READING FROM THE STDIN
 */
+void	delone_t_stdin(t_stdin *input, void(*del)(void *, size_t)
+{
+	if (input)
+	{
+		del((*input)->info, (*input)->info_size);
+		ft_memdel((void**)input);
+	}
+}
 
-t_stdin	*new_t_stdin(void const *info, size_t info_size)
+void	del_t_stdin(t_stdin **input, void (*del)(void *, size_t))
+{
+	t_stdin *temp;
+
+	while (*input)
+	{
+		temp = (*input)->next;
+		delone_t_stdin(input, del);
+		*input = temp;
+	}
+}
+
+t_stdin	*new_t_stdin(char const *info, size_t info_size)
 {
 	t_stdin	*new;
 
