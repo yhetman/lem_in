@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/18 18:34:16 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/07/11 10:09:39 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void		ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
 t_list		*ft_lstnew(void const *content, size_t content_size);
 t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 //t_list		*ft_lstsort(t_list *lst, int (*cmp)(int, int));
+t_list		*ft_lstpush(t_list *first, void *item);
+void		ft_lstforeach(t_list *lst, void (*function)());
+void		ft_lst_rec_free(t_list *first);
 /*
 **	function for standard output
 */
@@ -98,6 +101,7 @@ char		*ft_strdup(const char *src);
 int			ft_str_count_char(char *str, char *search);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *str, int ch);
+size_t		ft_strlchr(const char *str, int c);
 int			ft_strcntchr(const char *str, bool(*find)(char));
 int			ft_strcntsplt(char **str);
 char		*ft_strcat(char *dest, const char *srce);
@@ -171,8 +175,6 @@ void		ft_putnstr_buff_unicode(t_buffer *buf, wchar_t *ustr, int n);
 int			*ft_range(int first, int last);
 void		ft_swap(int *a, int *b);
 double		ft_pow(double n, int power);
-int		ft_numblength(int number);
-int		ft_sqrt(int number);
 /*
 **	get_next_line
 */

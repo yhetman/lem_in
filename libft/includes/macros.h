@@ -6,17 +6,22 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/18 18:26:53 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/07/11 21:35:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 #define MACROS_H
+
+# define FT_STD_INT		(0)
+# define FT_STD_OUT		(1)
+# define FT_STD_ERR		(2)
 /*
 **  definition of window's size for mlx
 */
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
+# define FT_INT_MAX 2147483647
 /*
 **  colors
 */
