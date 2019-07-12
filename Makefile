@@ -20,7 +20,7 @@ HEADER		:=	-I libft/includes -I ./includes
 
 TOOLDIR		:=	./tools
 
-FILES		=	main reading
+FILES		=	main read init get_params game debug end get_info loop print start validation
 
 SRC			=	$(addprefix sources/, $(addsuffix .c, $(FILES)))
 OBJ			=	$(addprefix obj/, $(addsuffix .o, $(FILES)))
