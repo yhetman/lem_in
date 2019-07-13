@@ -40,9 +40,10 @@ clean:
 	make -C libft clean
 	@rm -rf $(OBJ)
 
-fclean:
+fclean: clean
 	make -C libft fclean
 	@rm -rf $(NAME)
+	
 re: fclean  all
 
 big: all

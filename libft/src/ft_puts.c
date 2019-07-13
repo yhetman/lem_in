@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 17:45:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/01/03 14:45:42 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/07/13 17:34:22 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_wstrput(t_shit *print)
 	}
 }
 
-void	ft_wcharput(t_shit *print, int wc, size_t wlength, size_t byte_size)
+void	ft_wcharput(t_shit *print, int wc, int wlength, int  byte_size)
 {
 	char	tmp[4];
 
