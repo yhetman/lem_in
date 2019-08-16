@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_min_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 07:33:05 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
+/*   Created: 2019/08/16 18:43:08 by yhetman           #+#    #+#             */
+/*   Updated: 2019/08/16 18:45:44 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_lst **alst, void (*del)(void *, size_t))
+int		ft_min_arr(int *arr, int size)
 {
-	if (!del || !alst || !*alst)
-		return ;
-	del((*alst)->content, (*alst)->content_size);
-	free(*alst);
-	*alst = NULL;
+	int		i;
+	int		min;
+
+	i = 0;
+	min = arr[0];
+	while (++i < size)
+		min = MIN(min, arr[i]);
+	return (min);
 }

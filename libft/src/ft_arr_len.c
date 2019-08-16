@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_arr_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 07:33:05 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
+/*   Created: 2019/08/16 18:27:51 by yhetman           #+#    #+#             */
+/*   Updated: 2019/08/16 18:30:16 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-void	ft_lstdelone(t_lst **alst, void (*del)(void *, size_t))
+int		ft_arr_len(int *tab, int len)
 {
-	if (!del || !alst || !*alst)
-		return ;
-	del((*alst)->content, (*alst)->content_size);
-	free(*alst);
-	*alst = NULL;
+	int		res;
+	int		i;
+
+	res = 0;
+	i = 0;
+	while (i < len)
+		res += tab[i++];
+	return (res / len);
 }

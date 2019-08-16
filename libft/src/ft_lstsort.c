@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 08:02:38 by yhetman           #+#    #+#             */
-/*   Updated: 2018/11/01 08:02:40 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_comper(int a, int b)
 		return (0);
 }
 
-static int	ft_content_comper(t_list *lst, int (*cmp)(int, int))
+static int	ft_content_comper(t_lst *lst, int (*cmp)(int, int))
 {
 	while (lst->next != NULL)
 	{
@@ -31,9 +31,9 @@ static int	ft_content_comper(t_list *lst, int (*cmp)(int, int))
 	return (1);
 }
 
-t_list		*ft_lstsort(t_list *lst, int (*cmp)(int, int))
+t_lst		*ft_lstsort(t_lst *lst, int (*cmp)(int, int))
 {
-	t_list	*sorted;
+	t_lst	*sorted;
 	void	*tempo;
 
 	if (lst == NULL || !(cmp))

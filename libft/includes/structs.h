@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:16:42 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:29:31 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:23:27 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ typedef struct		s_gnl
 	int				ret;
 }					t_gnl;
 
-typedef struct		s_list
+typedef struct		s_lst
 {
 	void			*content;
 	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
+	struct s_lst	*next;
+}					t_lst;
 
 typedef struct		s_color
 {
@@ -95,5 +95,7 @@ typedef struct		s_mlx
 	int				win_height;
 	int				win_width;
 }					t_mlx;
+
+typedef t_lst**		t_array_of_lists;
 
 #endif

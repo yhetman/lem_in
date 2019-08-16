@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 07:34:06 by yhetman           #+#    #+#             */
-/*   Updated: 2018/11/01 07:34:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void	ft_lstiter(t_lst *lst, void (*f)(t_lst *elem))
 {
-	t_list *tempo;
+	t_lst *tempo;
 
 	tempo = lst;
 	if (lst != NULL && f)

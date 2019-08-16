@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 19:09:00 by yhetman           #+#    #+#             */
-/*   Updated: 2018/10/28 19:09:02 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_lst	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*element;
+	t_lst	*element;
 
-	if (!(element = (t_list *)malloc(sizeof(t_list))))
+	if (!(element = (t_lst *)malloc(sizeof(t_lst))))
 		return (NULL);
 	if (content == NULL)
 	{

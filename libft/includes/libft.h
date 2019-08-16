@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/07/13 17:48:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:55:57 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <errno.h>
 # include <string.h>
 # include <time.h>
-//# include <mlx.h>
+# include <mlx.h>
 # include <math.h>
 # include <limits.h>
 # include <sys/types.h>
@@ -45,16 +45,16 @@ char		*ft_utoa_base(unsigned int numb, char *base);
 /*
 **	functions to work with lists
 */
-void		ft_lstadd(t_list **alst, t_list *new);
-void		ft_lstiter(t_list *lst, void(*f)(t_list *elem));
-void		ft_lstdel(t_list **alst, void(*del)(void*, size_t));
-void		ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
-t_list		*ft_lstnew(void const *content, size_t content_size);
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-//t_list		*ft_lstsort(t_list *lst, int (*cmp)(int, int));
-t_list		*ft_lstpush(t_list *first, void *item);
-void		ft_lstforeach(t_list *lst, void (*function)());
-void		ft_lst_rec_free(t_list *first);
+void		ft_lstadd(t_lst **alst, t_lst *new_n);
+void		ft_lstiter(t_lst *lst, void(*f)(t_lst *elem));
+void		ft_lstdel(t_lst **alst, void(*del)(void*, size_t));
+void		ft_lstdelone(t_lst **alst, void(*del)(void *, size_t));
+t_lst		*ft_lstnew(void const *content, size_t content_size);
+t_lst		*ft_lstmap(t_lst *lst, t_lst *(*f)(t_lst *elem));
+//t_lst		*ft_lstsort(t_lst *lst, int (*cmp)(int, int));
+t_lst		*ft_lstpush(t_lst *first, void *item);
+void		ft_lstforeach(t_lst *lst, void (*function)());
+void		ft_lst_rec_free(t_lst *first);
 /*
 **	function for standard output
 */
@@ -129,6 +129,8 @@ int			ft_imaxlen_base(intmax_t n, int base);
 size_t		ft_wstrlen(unsigned *s);
 size_t		ft_wcharlen(unsigned wc);
 int			ft_ulen_base(unsigned int nbr, int base);
+int			ft_arr_len(int *tab, int len);
+int			ft_min_arr(int *arr, int size);
 /*
 **	memory management
 */

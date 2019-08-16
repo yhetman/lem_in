@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#*   Updated: 2019/07/11 12:08:06 by yhetman          ###   ########.fr       *#
+#    Updated: 2019/08/16 18:44:34 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ FLAGS = -Wall -Wextra -Werror -g3
 
 LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_itoa ft_atoi ft_htoi ft_lstadd ft_lstiter ft_lstdel \
-					ft_lst_rec_free ft_lstforeach \
+					ft_lst_rec_free ft_lstforeach  ft_min_arr\
 					ft_lstdelone ft_lstnew ft_lstmap ft_lstpush \
 					ft_putchar ft_putstr ft_putendl ft_putnbr \
 					ft_putchar_fd ft_putstr_fd ft_putendl_fd \
-					ft_putnbr_fd ft_putwstr ft_putwchar \
+					ft_putnbr_fd ft_putwstr ft_putwchar  ft_arr_len \
 					ft_put_uint_base ft_put_uintmax_base \
 					ft_put_uintmax ft_strdel ft_strnew ft_strmap \
 					ft_strmapi ft_strclr ft_striter ft_striteri \
@@ -88,11 +88,11 @@ $(OBJ_PATH):
 
 $(OBJ_LIBFT): obj/%.o: src/%.c $(HEADER_LIBFT)
 	@$(CC) -o $@ $(FLAGS) $(HEADERS) -c $<
-	@echo -n "$(CYAN).$(EOC)"
+	@echo "$(CYAN).$(EOC)"
 
 $(OBJ_PRINTF): ft_printf/obj/%.o: ft_printf/src/%.c $(HEADER_PRINTF)
 	@$(CC) -o $@ $(FLAGS) $(HEADERS) -c $<
-	@echo -n "$(PURPLE).$(EOC)"
+	@echo "$(PURPLE).$(EOC)"
 
 clean:
 	@rm -rf $(OBJ_LIBFT) $(OBJ_PRINTF)

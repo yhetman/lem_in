@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 07:41:42 by yhetman           #+#    #+#             */
-/*   Updated: 2018/11/01 07:41:44 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
+void	ft_lstdel(t_lst **alst, void (*del)(void*, size_t))
 {
-	t_list	*tempo;
+	t_lst	*tempo;
 
 	if (!del || !alst || !*alst)
 		return ;

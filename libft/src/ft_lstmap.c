@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 07:34:27 by yhetman           #+#    #+#             */
-/*   Updated: 2018/11/01 07:34:28 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:18:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_lst	*ft_lstmap(t_lst *lst, t_lst *(*f)(t_lst *elem))
 {
-	t_list	*newlst;
-	t_list	*created;
-	t_list	*tempo;
+	t_lst	*newlst;
+	t_lst	*created;
+	t_lst	*tempo;
 
 	if (!lst || !f)
 		return (NULL);
