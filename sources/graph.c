@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 16:46:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:42:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 21:44:50 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void			add_connections_to_graph(t_lst **peak,
 		if (links[i] == LINKED)
 		{
 			fill_edge(&tmp, vtx_nb, i);
-			ft_lstadd(peak, ft_lstnew(&tmp, sizeof(t_dead_end)));
+			ft_lst_last_in(peak, ft_lstnew(&tmp, sizeof(t_dead_end)));
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/07/11 21:35:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 22:01:28 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 /*
 **  definition of buffer's size, used in get_next_line and ft_printf
 */
-# define BUFF_SIZE      4096 
+# define BUFF_SIZE      1
 /*
 **  string stuff
 */
@@ -91,7 +91,7 @@
 # define IS_SIGN(c)				(c == '+' || c == '-')
 # define IS_INT(c)              ft_is_integer(c)
 # define IS_DASH(c)             ft_isdash(c)
-# define IS_FLAG                ft_isflag(c)
+# define IS_FLAG(c)             ft_isflag(c)
 # define TO_ASCII(c)			(c & 0x7F)
 # define TO_LOWER(c)			(IS_UPPER(c) ? c + ' ' : c)
 # define TO_UPPER(c)			(IS_LOWER(c) ? c - ' ' : c)

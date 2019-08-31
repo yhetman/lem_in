@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:40:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:37:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 21:46:10 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_lst	*without_congestion(t_send *sender, t_lst *beg_point, int flow)
 			break ;
 		path.traffic = ((t_dead_end*)(beg_point)->content);
 		path.sender = i;
-		ft_lstadd(&congestion, ft_lstnew(&path, sizeof(path)));
+		ft_lst_last_in(&congestion, ft_lstnew(&path, sizeof(path)));
 		if (DEBUG > 1)
 			ft_printf("DEBUG: Queued path %d: %d->%d.\n", i,
 			((t_dead_end*)(beg_point)->content)->src,
@@ -74,7 +74,7 @@ int		another_way(t_send *sender)
 	if (sender->ants[elem.sender] > 0)
 	{
 		sender->ants[elem.sender]--;
-		ft_lstadd(&sender->congestion, ft_lstnew(&elem, sizeof(t_path)));
+		ft_lst_last_in(&sender->congestion, ft_lstnew(&elem, sizeof(t_path)));
 		if (DEBUG)
 			ft_printf("DEBUG: Sending ant through path %d.\n", elem.sender);
 	}

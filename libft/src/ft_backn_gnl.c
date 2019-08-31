@@ -6,126 +6,85 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:42:23 by yhetman           #+#    #+#             */
-/*   Updated: 2019/03/08 14:21:30 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 22:01:42 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static void	mew_lst(t_fdl **mew, int fd)
+static char	*ft_strrealloc(char *str, size_t size)
 {
-	*mew = (t_fdl *)malloc(sizeof(**mew));
-	(*mew)->reste = ft_strnew(0);
-	(*mew)->fd = fd;
-	(*mew)->next = NULL;
+	char	*mem;
+
+	mem = ft_strnew(size);
+	if (str)
+	{
+		ft_strcpy(mem, str);
+		ft_strdel(&str);
+	}
+	return (mem);
 }
 
-static void	multi_fd_gnl(t_fdl **mew, t_fdl **mew2, int fd)
+static void	free_cat(char **gnl, char *tmp)
 {
-	static t_fdl	*begin;
+	size_t	combined_size;
 
-	if (begin)
+	if (!tmp || !(*tmp))
+		return ;
+	combined_size = 0;
+	if (gnl && *gnl)
+		combined_size += ft_strlen(*gnl);
+	combined_size += ft_strlen(tmp);
+	*gnl = ft_strrealloc(*gnl, combined_size);
+	*gnl = ft_strcat(*gnl, tmp);
+}
+
+static void	get_one_line(char **gnl, char **line)
+{
+	int		split;
+	char	*tmp;
+
+	if (!gnl)
+		return ;
+	split = ft_strclen(*gnl, '\n');
+	if (split != -1)
 	{
-		*mew = begin;
-		while (*mew != NULL)
-		{
-			if ((*mew)->fd == fd)
-				break ;
-			*mew2 = *mew;
-			*mew = (*mew)->next;
-		}
-		if (*mew == NULL)
-		{
-			mew_lst(mew, fd);
-			(*mew2)->next = *mew;
-		}
+		*(*gnl + split) = 0;
+		*line = ft_strdup(*gnl);
+		tmp = *gnl;
+		*gnl = ft_strdup(tmp + split + 1);
+		ft_strdel(&tmp);
 	}
 	else
 	{
-		mew_lst(mew, fd);
-		begin = *mew;
+		*line = ft_strdup(*gnl);
+		ft_strdel(gnl);
 	}
-}
-
-static int	backslash_in_buffer(char *buffer, int length, t_fdl **mew,
-			char **line)
-{
-	char	*temp;
-	size_t	n;
-
-	n = 0;
-	temp = NULL;
-	if (buffer[0] == '\0')
-		return (-1);
-	buffer[length] = '\0';
-	if ((*mew)->reste == NULL)
-		(*mew)->reste = ft_strdup("");
-	if (ft_strchr(buffer, '\n'))
-	{
-		n = (size_t)ft_strclen(buffer, '\n');
-		buffer[n] = '\0';
-		*line = ft_strjoin((*mew)->reste, buffer);
-		*line = ft_strjoin(*line, "\n");
-		free((*mew)->reste);
-		(*mew)->reste = ft_strdup(&buffer[n + 1]);
-		free(buffer);
-		return (1);
-	}
-	temp = (*mew)->reste;
-	(*mew)->reste = ft_strjoin((*mew)->reste, buffer);
-	free(temp);
-	return (0);
-}
-
-static int	backslash_in_rest(int fd, char **line, t_fdl **mew, char **buffer)
-{
-	size_t		n;
-	char		*temp;
-	t_fdl		*mew2;
-
-	temp = NULL;
-	mew2 = NULL;
-	*line = NULL;
-	multi_fd_gnl(mew, &mew2, fd);
-	*buffer = ft_strnew(BUFF_SIZE);
-	if ((*mew)->reste && ft_strchr((*mew)->reste, '\n'))
-	{
-		n = (size_t)ft_strclen((*mew)->reste, '\n');
-		(*mew)->reste[n] = '\0';
-		*line = ft_strdup((*mew)->reste);
-		*line = ft_strjoin(*line, "\n");
-		temp = (*mew)->reste;
-		(*mew)->reste = ft_strdup(&(*mew)->reste[n + 1]);
-		free(temp);
-		return (1);
-	}
-	return (0);
 }
 
 int			ft_backn_gnl(const int fd, char **line)
 {
-	t_gnl			gnl;
+	static char		*gnl[OPEN_MAX];
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
 
-	gnl.length = 0;
-	gnl.ret = -1;
-	if (fd < 0 || BUFF_SIZE < 1 || !line)
+	if (!line || fd < 0)
 		return (-1);
-	if ((backslash_in_rest(fd, line, &gnl.mew, &gnl.buffer)) == 1)
-		return (1);
-	while ((gnl.length = (int)read(fd, gnl.buffer, BUFF_SIZE)) > 0)
+	if (*line)
+		ft_strdel(line);
+	while ((ret = read(fd, buf, BUFF_SIZE)) || (gnl[fd] && *(gnl[fd])))
 	{
-		gnl.ret = backslash_in_buffer(gnl.buffer, gnl.length, &gnl.mew, line);
-		if (gnl.ret == 1 || gnl.ret == -1)
-			return (gnl.ret);
+		if (ret < 0 || (buf[ret] = 0))
+			return (-1);
+		if (buf[0])
+			free_cat(&gnl[fd], buf);
+		if (gnl[fd] && *(gnl[fd]) && (ft_strchr(gnl[fd], '\n')
+					|| ret < BUFF_SIZE))
+		{
+			get_one_line(&(gnl[fd]), line);
+			return (1);
+		}
 	}
-	if (gnl.length < 0 ||
-			((gnl.mew->reste && (*line = ft_strdup(gnl.mew->reste)) == NULL)))
-		return (-1);
-	free(gnl.mew->reste);
-	free(gnl.buffer);
-	gnl.buffer = NULL;
-	gnl.mew->reste = NULL;
-	if (gnl.length == 0 && *line && (*line)[0] != '\0')
-		return (1);
+	ft_strdel(&gnl[fd]);
 	return (0);
 }

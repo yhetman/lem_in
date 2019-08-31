@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/08/16 18:44:34 by yhetman          ###   ########.fr        #
+#    Updated: 2019/08/31 21:34:37 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror -g3
 
 LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_itoa ft_atoi ft_htoi ft_lstadd ft_lstiter ft_lstdel \
-					ft_lst_rec_free ft_lstforeach  ft_min_arr\
+					ft_lst_rec_free ft_lstforeach  ft_min_arr ft_lst_last_in \
 					ft_lstdelone ft_lstnew ft_lstmap ft_lstpush \
 					ft_putchar ft_putstr ft_putendl ft_putnbr \
 					ft_putchar_fd ft_putstr_fd ft_putendl_fd \

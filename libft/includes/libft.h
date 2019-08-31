@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:55:57 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 21:30:51 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char		*ft_utoa_base(unsigned int numb, char *base);
 **	functions to work with lists
 */
 void		ft_lstadd(t_lst **alst, t_lst *new_n);
+void		ft_lst_last_in(t_lst **tail, t_lst *last);
 void		ft_lstiter(t_lst *lst, void(*f)(t_lst *elem));
 void		ft_lstdel(t_lst **alst, void(*del)(void*, size_t));
 void		ft_lstdelone(t_lst **alst, void(*del)(void *, size_t));

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:41:08 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:52:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 21:22:37 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ bool			remember_each_f_ant(t_lst **head, int *leminants)
 	{
 		*leminants = ft_atoi((char*)(*head)->content);
 		if (DEBUG > 1)
-			ft_printf("DEBUG: Stored %d ant%c.\n", *leminants, \
-					*leminants > 1 ? 's' : 0);
+			ft_printf("DEBUG: Stored %d ant%c.\n", *leminants, *leminants > 1 ? 's' : 0);
 		if (*leminants >= 0)
 			return (true);
 		else
@@ -44,7 +43,7 @@ bool			remember_each_f_ant(t_lst **head, int *leminants)
 		return (false);
 }
 
-static bool	map_has_in_out(t_lemin *lemin)
+static bool		map_has_in_out(t_lemin *lemin)
 {
 	if (DEBUG > 1)
 		ft_printf("DEBUG: Start room: \"%s\", end room: \"%s\".\n",

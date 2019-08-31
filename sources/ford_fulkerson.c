@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 17:31:32 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:36:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/08/31 21:44:49 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_lst **graph, int src)
 		if (edge_is_valid(dead_end, *path, src))
 		{
 			(*path)[dead_end->depth] = dead_end;
-			ft_lstadd(congestion, ft_lstnew(&dead_end->depth, sizeof(int)));
+			ft_lst_last_in(congestion, ft_lstnew(&dead_end->depth, sizeof(int)));
 			if (DEBUG > 3)
 				ft_printf("\t\tEnqueued peak %d,\n", dead_end->depth);
 		}

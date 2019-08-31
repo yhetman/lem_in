@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_lst_last_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 07:33:37 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/31 22:12:00 by yhetman          ###   ########.fr       */
+/*   Created: 2019/08/31 21:29:16 by yhetman           #+#    #+#             */
+/*   Updated: 2019/08/31 21:33:33 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-void	ft_lstadd(t_lst **alst, t_lst *new)
+static t_lst		*ft_lst_find_last(t_lst *tail)
 {
-	if (new)
+	while (tail && tail->next)
+		tail = tail->next;
+	return (tail);
+}
+
+void				ft_lst_last_in(t_lst **tail, t_lst *last)
+{
+	if (last)
 	{
-		new->next = *alst;
-		*alst = new;
+		if (*tail)
+		{
+			ft_lst_find_last(*tail)->next = last;
+			last->next = NULL;
+		}
+		else
+			ft_lstadd(tail, last);
 	}
 }
