@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 12:51:20 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:58:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:08:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_str_count_char(char *str, char *search)
 
 	length_search = 0;
 	nb_occur = 0;
-	length_search = ft_strlen(search);
+	length_search = LEN(search);
 	while (str)
 	{
 		if ((str = ft_strstr(str, search)))

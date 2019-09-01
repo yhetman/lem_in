@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 17:27:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 19:16:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static bool	check_room_coordinate(char **name)
 
 static bool	room_is_valid(char *name)
 {
-	if (name[0] == 'L' || name[0] == '#')
+	if (name[0] == 'L' || name[0] == HASH)
 		return (false);
-	name += ft_strlen(name) - 1;
+	name += LEN(name) - 1;
 	if (!check_room_coordinate(&name))
 		return (false);
 	name--;
@@ -63,7 +63,7 @@ char			*room_name(char *input)
 	size_t	i;
 	char	*name;
 
-	i = ft_strlen(input);
+	i = LEN(input);
 	if (room_is_valid(input))
 	{
 		while (!IS_SPACE(input[i]))

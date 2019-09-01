@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 17:45:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/07/13 17:34:22 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:08:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_strput(t_shit *print)
 		ft_printf_str((char *)str, print);
 	else
 	{
-		length = (int)(ft_strlen((char*)str));
+		length = (int)(LEN((char*)str));
 		(print->params & PRECIS) ? length = MIN(print->precis, length) : 0;
 		print->filled = (print->min_length - length) > 0
 		? (print->min_length - length) : 0;
@@ -99,7 +99,7 @@ void	ft_printf_str(char *str, t_shit *print)
 				ft_buffering(print, "0", 1);
 	}
 	else
-		ft_buffering(print, str, (int)ft_strlen(str));
+		ft_buffering(print, str, (int)LEN(str));
 }
 
 void	ft_char(t_shit *print, unsigned c)

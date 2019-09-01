@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_uintmax_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 14:03:32 by yhetman           #+#    #+#             */
-/*   Updated: 2018/12/27 14:15:29 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:08:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_uintmax_base_toa(uintmax_t n, char *b)
 	i = 0;
 	if (n == 0)
 		return (ft_strdup("0"));
-	b_size = ft_strlen(b);
+	b_size = LEN(b);
 	s = ft_strnew(ft_umaxlen_base(n, b_size) + 1);
 	while (n)
 	{

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:42:23 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/31 22:01:42 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:08:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	free_cat(char **gnl, char *tmp)
 		return ;
 	combined_size = 0;
 	if (gnl && *gnl)
-		combined_size += ft_strlen(*gnl);
-	combined_size += ft_strlen(tmp);
+		combined_size += LEN(*gnl);
+	combined_size += LEN(tmp);
 	*gnl = ft_strrealloc(*gnl, combined_size);
 	*gnl = ft_strcat(*gnl, tmp);
 }

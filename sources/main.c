@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/31 22:13:01 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:27:14 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,12 @@ static t_lst	*read_from_stdin(void)
 	input = NULL;
 	while ((ret = ft_backn_gnl(0, &l)))
 	{
-		if (ret == -1 || !ft_isascii(l[0]))
-			ft_error_manager("ERROR OCCURED: can't read the file.");
-		ft_lst_last_in(&input, ft_lstnew(l, sizeof(char) * (ft_strlen(l) + 1)));
+		if (ret == -1 || !IS_ASCII(l[0]))
+			ft_error_manager("ERROR OCCURED: can't read the file!");
+		ft_lst_last_in(&input, ft_lstnew(l, sizeof(char) * (LEN(l) + 1)));
 	}
 	return (input);
 }
-
-//static int		optional(int argc, char **argv)
-//{
-//	int		i;
-//	int		bits;
-//
-//	bits = 0;
-//	i = 1;
-//	while (i < argc)
-//	{
-//		if (IS_FLAG(argv[i]) == 0)
-//			return (0);
-//		else if (IS_FLAG(argv[i]) == 1)
-//		{
-//			argv[i]++;
-//			while (*(argv[i]))
-//			{
-//				bits = bits | (1 << (*argv[i] - 'a'));
-//				argv[i]++;
-//			}
-//		}
-//		i++;
-//	}
-//	return (bits);
-//}
 
 static t_array_of_lists	ford(t_lemin *lemin)
 {
@@ -82,12 +57,12 @@ static void				figure_out_the_solution(t_lemin *lemin)
 	s = ford(lemin);
 	if (s && lemin->flow > 0)
 	{
-		ft_putchar('\n');
+		ft_putchar_fd('\n', STD_OUT);
 		ft_lstdel(&lemin->len_of_path, &ft_free_node);
 		send_ants(s, lemin);
 	}
 	else
-		ft_putendl("ERROR");
+		ft_error_manager("ERROR OCCURED!");
 	delete_map(s, lemin->size_of_graph);
 }
 
@@ -98,15 +73,12 @@ int					main(int argc, char **argv)
 	t_lemin			lemin;
 
 	ft_bzero(&lemin, sizeof(t_lemin));
-	if(argc && argv) {}
-	//if (!(optional(argc, argv) ^ 21264))
-	//	lemin.ant_output = ANT_DISPLAY;
-	//else
+	if(argc && argv)
 		lemin.ant_output = "L";
 	input = read_from_stdin();
 	tmp = input;
 	parsing(&input, &tmp, &lemin);
 	output_buffer(tmp);
 	figure_out_the_solution(&lemin);
-	shut_the_f_up(&tmp, &lemin, "", EXIT_SUCCESS);
+	shut_the_f_up(&tmp, &lemin, "", SUCCESS);
 }

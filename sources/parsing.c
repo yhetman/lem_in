@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:37:51 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ bool				remember_begining_finish(t_lemin *lemin, char *name, char type)
 
 static inline void	parse_special(t_lst **ptr, char *type, char **str)
 {
-	if (!ft_strcmp(*str, "##start"))
+	if (!ft_strcmp(*str, START))
 		*type = BEGIN;
-	else if (!ft_strcmp(*str, "##end"))
+	else if (!ft_strcmp(*str, END))
 		*type = FINISH;
 	(*ptr) = (*ptr)->next;
 	*str = (char*)((*ptr)->content);
-	while (*str[0] == '#')
+	while (*str[0] == HASH)
 	{
 		(*ptr) = (*ptr)->next;
 		*str = (char*)((*ptr)->content);
@@ -106,9 +106,9 @@ void				remember_rooms(t_lst **ptr, t_lemin *lemin)
 		if (!*str)
 			return ;
 		type = NORM;
-		if (str[0] == '#')
+		if (str[0] == HASH)
 		{
-			if (str[1] != '#')
+			if (str[1] != HASH)
 			{
 				(*ptr) = (*ptr)->next;
 				continue ;

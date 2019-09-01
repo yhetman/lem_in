@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 14:04:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 19:15:51 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void				fill_tab_pipes(t_lemin *lemin, t_lst **ptr)
 
 	while (*ptr)
 	{
-		if (((char*)(*ptr)->content)[0] == '#')
+		if (((char*)(*ptr)->content)[0] == HASH)
 		{
 			(*ptr) = (*ptr)->next;
 			continue ;

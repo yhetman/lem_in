@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:51:54 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:30:13 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "../libft/includes/macros.h"
 # include "../libft/includes/structs.h"
 
+# define HASH		'#'
+# define START		"##start"
+# define END		"##end"
 # define DEBUG		0
 # define NORM		1
 # define BEGIN		2
@@ -123,7 +126,6 @@ int					another_way(t_send *sender);
 int					last_peak(t_lst *peak);
 int					calculation_of_length(t_array_of_lists graph, int src, int depth);
 int					peak_step(t_lst *peak);
-bool				remember_each_f_ant(t_lst **head, int *leminants);
 int					analysator(t_array_of_lists graph, t_lemin *lemin);
 int					requirement_of_lines(int amount_of_ants, int flow, int avg);
 

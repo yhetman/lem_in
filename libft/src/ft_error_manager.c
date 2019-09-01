@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 05:19:37 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 05:22:00 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:18:55 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_error_manager(char *str)
 {
 	ft_printf("%{red}%s%{eoc}", str);
-	exit(EXIT_FAILURE);
+	exit(FAIL);
 }

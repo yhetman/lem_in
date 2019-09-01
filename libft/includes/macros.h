@@ -6,16 +6,18 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/31 22:01:28 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:20:05 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 #define MACROS_H
 
-# define FT_STD_INT		(0)
-# define FT_STD_OUT		(1)
-# define FT_STD_ERR		(2)
+# define STD_IN		    (0)
+# define STD_OUT		(1)
+# define STD_ERR		(2)
+# define FAIL           1
+# define SUCCESS        0
 /*
 **  definition of window's size for mlx
 */
@@ -87,7 +89,7 @@
 # define IS_ALPHA(c)			(IS_LOWER(c) || IS_UPPER(c))
 # define IS_ALNUM(c)			(IS_DIGIT(c) || IS_ALPHA(c))
 # define IS_PUNCT(c)			(IS_PRINT(c) && !FT_ISALNUM(c) && c != ' ')
-# define IS_SPACE(c)			((unsigned int)(c - '\t') < 5)
+# define IS_SPACE(c)			(((9 <= c && c <= 13) || c == 32) ? 1 : 0)
 # define IS_SIGN(c)				(c == '+' || c == '-')
 # define IS_INT(c)              ft_is_integer(c)
 # define IS_DASH(c)             ft_isdash(c)
