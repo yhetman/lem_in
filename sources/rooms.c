@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 17:27:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 21:50:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	check_room_coordinate(char **name)
 {
-	while (ft_isdigit(**name))
+	while (IS_DIGIT(**name))
 		(*name)--;
 	if (**name == '-' || **name == '+')
 		(*name)--;
@@ -22,9 +22,7 @@ static bool	check_room_coordinate(char **name)
 	if (!IS_INT(*name))
 		return (false);
 	(*name)--;
-	if (**name != ' ')
-		return (false);
-	return (true);
+	return ((**name != ' ') ? false : true);
 }
 
 static bool	room_is_valid(char *name)
@@ -40,8 +38,8 @@ static bool	room_is_valid(char *name)
 	return (true);
 }
 
-t_room			*add_new_room(char *name_ptr, char type, t_coord *coord, \
-int ant_amount)
+t_room		*add_new_room(char *name_ptr, char type, t_coord *coord,
+			int ant_amount)
 {
 	t_room	*new;
 
@@ -58,7 +56,7 @@ int ant_amount)
 	return (new);
 }
 
-char			*room_name(char *input)
+char		*room_name(char *input)
 {
 	size_t	i;
 	char	*name;
@@ -85,7 +83,7 @@ char			*room_name(char *input)
 		return (NULL);
 }
 
-int				check_name_in_list(char *name, t_room *amount_of_rooms)
+int			check_name_in_list(char *name, t_room *amount_of_rooms)
 {
 	int	i;
 

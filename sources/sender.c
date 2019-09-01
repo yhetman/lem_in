@@ -6,13 +6,14 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 14:50:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:38:12 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 22:07:05 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int				count_steps(t_send *sender, int flow)
+
+static int		count_steps(t_send *sender, int flow)
 {
 	int	i;
 	int res;
@@ -27,54 +28,56 @@ int				count_steps(t_send *sender, int flow)
 	return (res);
 }
 
-char			*check_room_name(t_lemin *lemin, int amount_of_rooms)
+static t_lst		*without_congestion(t_send *sender, t_lst *beg_point, int flow)
 {
-	t_room *tmp_rooms;
+	t_lst	*congestion;
+	int		i;
+	t_path	path;
 
-	tmp_rooms = lemin->amount_of_rooms;
-	while (amount_of_rooms--)
-		tmp_rooms = tmp_rooms->next;
-	return (tmp_rooms->name);
+	i = 0;
+	congestion = NULL;
+	while (true)
+	{
+		while (i < flow && sender->ants[i] == 0)
+			i++;
+		while (beg_point && ((t_dead_end*)(beg_point)->content)->flow == 0)
+			beg_point = beg_point->next;
+		if (i == flow || !beg_point)
+			break ;
+		path.traffic = ((t_dead_end*)(beg_point)->content);
+		path.sender = i;
+		ft_lst_last_in(&congestion, ft_lstnew(&path, sizeof(path)));
+		i++;
+		beg_point = beg_point->next;
+	}
+	return (congestion);
 }
 
-int				next_peak(t_lst *peak)
+static void		initialize_sending(t_send *sender, t_lemin *lemin, t_lst **graph)
 {
-	t_dead_end	*dead_end;
-
-	dead_end = (t_dead_end*)(peak->content);
-	while (dead_end->flow != 1)
-	{
-		peak = peak->next;
-		dead_end = (t_dead_end*)(peak->content);
-	}
-	return (dead_end->depth);
+	ft_bzero(sender, sizeof(t_send));
+	sender->positions = ft_memalloc(sizeof(int) * (lemin->amount_of_ants));
+	sender->len_of_path = size_of_the_way(graph, lemin);
+	sender->fastest = ft_min_arr(sender->len_of_path, lemin->flow);
+	sender->ants = ft_memalloc(sizeof(int) * lemin->flow);
+	amount_to_depart(lemin, sender);
+	sender->flow = count_steps(sender, lemin->flow);
+	delete_dead_ends(sender, (graph)[lemin->begin], lemin->flow);
+	sender->congestion = without_congestion(sender, graph[lemin->begin], lemin->flow);
 }
 
-static bool	send_one_ant(t_lst *vtx, t_lemin *lmn, int i, t_send *sendr)
+static void		clean_sending(t_send *sender)
 {
-	int		nvi;
-	bool	on_start;
-
-	on_start = (sendr->positions[i] == lmn->begin);
-	if (lmn->flow > 1 && on_start)
-	{
-		nvi = another_way(sendr);
-	}
-	else
-		nvi = next_peak(vtx);
-	output_ants(i, check_room_name(lmn, nvi), \
-			sendr->departed, lmn->ant_output);
-	sendr->positions[i] = nvi;
-	if (nvi == lmn->finish)
-		return (true);
-	else
-		return (false);
+	ft_memdel((void**)&sender->ants);
+	ft_memdel((void**)&sender->len_of_path);
+	ft_lstdel(&sender->congestion, &ft_free_node);
+	ft_memdel((void**)&sender->positions);
 }
 
 void			send_ants(t_array_of_lists graph, t_lemin *lemin)
 {
 	int			i;
-	t_send	sender;
+	t_send		sender;
 
 	initialize_sending(&sender, lemin, graph);
 	i = -1;
@@ -84,18 +87,14 @@ void			send_ants(t_array_of_lists graph, t_lemin *lemin)
 	{
 		if (sender.departed < lemin->amount_of_ants)
 			sender.departed += sender.flow;
-		i = 0;
-		while (i < sender.departed && i < lemin->amount_of_ants)
+		i = -1;
+		while (++i < sender.departed && i < lemin->amount_of_ants)
 		{
 			delete_dead_ends(&sender, (graph)[lemin->begin], lemin->flow);
 			if (sender.positions[i] != lemin->finish)
-				sender.arrived += send_one_ant(\
-						graph[sender.positions[i]], lemin, i, &sender);
-			i++;
+				sender.arrived += send_one_ant(graph[sender.positions[i]], lemin, i, &sender);
 		}
-		ft_putchar('\n');
-		if (DEBUG)
-			output_ways(&sender, lemin->flow);
+		ft_putchar_fd('\n', STD_OUT);
 	}
 	clean_sending(&sender);
 }

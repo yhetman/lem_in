@@ -6,29 +6,48 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:54:04 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
 
-bool				room_already_exists(t_room *map, char *room)
+static bool			room_already_exists(t_room *map, char *room)
 {
 	while (map)
 	{
 		if (!ft_strcmp(map->name, room))
-		{
-			if (DEBUG > 1)
-				ft_printf("DEBUG: \"%s\" already exists.\n", room);
 			return (true);
-		}
 		map = map->next;
 	}
 	return (false);
 }
 
-static bool		add_room(t_lemin **lemin, char *input, char type)
+static bool			remember_begining_finish(t_lemin *lemin, char *name, char type)
+{
+	if (type == FINISH)
+	{
+		if (lemin->finish_name)
+		{
+			ft_strdel(&name);
+			return (false);
+		}
+		lemin->finish_name = ft_strdup(name);
+	}
+	else if (type == BEGIN)
+	{
+		if (lemin->begin_name)
+		{
+			ft_strdel(&name);
+			return (false);
+		}
+		lemin->begin_name = ft_strdup(name);
+	}
+	return (true);
+}
+
+static bool			add_room(t_lemin **lemin, char *input, char type)
 {
 	t_room *new;
 	char	*name;
@@ -37,8 +56,6 @@ static bool		add_room(t_lemin **lemin, char *input, char type)
 	name = room_name(input);
 	if (!name)
 	{
-		if (DEBUG > 1)
-			ft_printf("DEBUG: \"%s\" invalid somehow.\n", input);
 		ft_strdel(&name);
 		return (false);
 	}
@@ -54,29 +71,6 @@ static bool		add_room(t_lemin **lemin, char *input, char type)
 	new = add_new_room(name, type, &coord, (*lemin)->amount_of_ants);
 	new->next = (*lemin)->amount_of_rooms;
 	(*lemin)->amount_of_rooms = new;
-	return (true);
-}
-
-bool				remember_begining_finish(t_lemin *lemin, char *name, char type)
-{
-	if (type == FINISH)
-	{
-		if (lemin->finish_name)
-		{
-			ft_memdel((void**)&name);
-			return (false);
-		}
-		lemin->finish_name = ft_strdup(name);
-	}
-	else if (type == BEGIN)
-	{
-		if (lemin->begin_name)
-		{
-			ft_memdel((void**)&name);
-			return (false);
-		}
-		lemin->begin_name = ft_strdup(name);
-	}
 	return (true);
 }
 
@@ -116,7 +110,7 @@ void				remember_rooms(t_lst **ptr, t_lemin *lemin)
 			else
 				parse_special(ptr, &type, &str);
 		}
-		if (add_room(&lemin, str, type) == false)
+		if (!add_room(&lemin, str, type))
 			return ;
 		(*ptr) = (*ptr)->next;
 	}

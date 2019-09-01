@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 14:04:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:26:06 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 22:05:04 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void				fill_diagonal_types(t_lemin *lemin)
 {
-	t_room	*tmp;
-	int		i;
+	t_room				*tmp;
+	int					i;
 
 	tmp = lemin->amount_of_rooms;
 	i = 0;
@@ -28,7 +28,7 @@ static void				fill_diagonal_types(t_lemin *lemin)
 	lemin->amount_of_rooms = tmp;
 }
 
-static inline bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
+static inline bool		parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 {
 	int		rooms_to_connect[2];
 

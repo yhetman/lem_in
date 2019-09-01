@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:42:13 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:37:28 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 21:17:02 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	room_maid(t_room **head)
 	while (ptr)
 	{
 		tmp = ptr->next;
-		ft_strdel((char**)&ptr->name);
+		ft_strdel(&ptr->name);
 		ft_memdel((void**)&ptr);
 		ptr = tmp;
 	}
@@ -47,24 +47,8 @@ void	clean_double_array(char **split)
 
 void	clean_lem_in(t_lemin *addr)
 {
-	ft_memdel((void**)&addr->begin_name);
-	ft_memdel((void**)&addr->finish_name);
+	ft_strdel(&addr->begin_name);
+	ft_strdel(&addr->finish_name);
 	room_maid(&(addr)->amount_of_rooms);
 	clean_double_array(addr->pipes);
-}
-
-void	delete_map(t_array_of_lists graph, int size)
-{
-	int	i;
-
-	if (!graph || !size)
-		return ;
-	i = 0;
-	while (i < size)
-	{
-		if (graph[i])
-			ft_lstdel(&graph[i], &ft_free_node);
-		i++;
-	}
-	ft_memdel((void**)&graph);
 }

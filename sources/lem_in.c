@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:41:08 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:30:23 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:45:39 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void			shut_the_f_up(t_lst **lst, t_lemin *lemin, const char *err, int status)
+void						shut_the_f_up(t_lst **lst, t_lemin *lemin, const char *err, int status)
 {
 	ft_lstdel(lst, &ft_free_node);
 	clean_lem_in(lemin);
@@ -49,8 +49,6 @@ void			parsing(t_lst **input, t_lst **tmp, t_lemin *lemin)
 		shut_the_f_up(tmp, lemin, "ERROR OCCURED: incorrect input.\n", FAIL);
 	*input = (*input)->next;
 	remember_rooms(input, lemin);
-	if (!lemin->amount_of_rooms || !is_valid_map(lemin))
+	if (!lemin->amount_of_rooms || !is_valid_map(lemin) || !remember_pipes(input, lemin))
 		shut_the_f_up(tmp, lemin, "ERROR OCCURED: invalid map.\n", FAIL);
-	if (!remember_pipes(input, lemin))
-		shut_the_f_up(tmp, lemin, "ERROR OCCURED: incorrect amount of pipes.\n", FAIL);
 }

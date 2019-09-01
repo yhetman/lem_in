@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/29 14:18:45 by yhetman           #+#    #+#              #
-#    Updated: 2019/08/16 18:16:02 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/01 22:29:41 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ DEBUG	:=	-g3 #-fsanitize=address -fsanitize=undefined -Og
 INCLUDE	:=	-lft -L$(LIBDIR)/
 NAME	:=	lem-in
 SRC_PATH		= 	./sources/
-SRC_NAME	:=	analysator.c count.c dead_ends.c ford_fulkerson.c graph.c house_maid.c \
-				initialize_sending.c lem_in.c output.c parsing.c path.c \
+SRC_NAME	:=	count.c ford_fulkerson.c graph.c house_maid.c \
+				one_ant_send.c lem_in.c output.c parsing.c get_coord.c \
 				peak_step.c pipes.c rooms.c sender.c ways.c 
 SRC			=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_PATH	:= 	./obj/

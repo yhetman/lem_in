@@ -6,18 +6,30 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:27:14 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/01 19:44:22 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-
-static t_lst	*read_from_stdin(void)
+static void				delete_map(t_array_of_lists graph, int size)
 {
-	t_lst		*input;
-	char		*l;
-	int			ret;
+	int					i;
+
+	if (!graph || !size)
+		return ;
+	i = -1;
+	while (++i < size)
+		if (graph[i])
+			ft_lstdel(&graph[i], &ft_free_node);
+	ft_memdel((void**)&graph);
+}
+
+static t_lst			*read_from_stdin(void)
+{
+	t_lst				*input;
+	char				*l;
+	int					ret;
 
 	l = NULL;
 	input = NULL;
