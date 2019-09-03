@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 17:31:32 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 22:03:03 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 20:46:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int						ford_fulkerson(t_array_of_lists graph, t_lemin *lemin,int stop)
 	min = INT_MAX;
 	ret = 0;
 	while (stop != lemin->flow && (path = bfs(graph,
-					lemin->begin, lemin->finish, lemin->size_of_graph)))
+	lemin->begin, lemin->finish, lemin->size_of_graph)))
 	{
 		if (flow_through_path(graph, path, lemin->begin, lemin->finish))
 			ft_memdel((void**)&path);

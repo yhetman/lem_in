@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 22:30:40 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 15:48:50 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@
 # define HASH		'#'
 # define START		"##start"
 # define END		"##end"
-# define DEBUG		0
 # define NORM		1
 # define BEGIN		2
 # define FINISH		3
 # define LINKED		4
-
-# define ANT_DISPLAY "🐜 "
 
 typedef struct		s_room
 {
@@ -51,7 +48,6 @@ typedef struct		s_lemin
 	char			*finish_name;
 	char			**pipes;
 	int				flow;
-	char			*ant_output;
 	t_lst			*input;
 	t_lst			*len_of_path;
 	t_room			*amount_of_rooms;

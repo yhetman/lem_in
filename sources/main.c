@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:44:22 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 15:50:04 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,13 @@ static void				figure_out_the_solution(t_lemin *lemin)
 	delete_map(s, lemin->size_of_graph);
 }
 
-int					main(int argc, char **argv)
+int					main(void)
 {
 	t_lst			*input;
 	t_lst			*tmp;
 	t_lemin			lemin;
 
 	ft_bzero(&lemin, sizeof(t_lemin));
-	if(argc && argv)
-		lemin.ant_output = "L";
 	input = read_from_stdin();
 	tmp = input;
 	parsing(&input, &tmp, &lemin);

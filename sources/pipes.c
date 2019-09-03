@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 14:04:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 22:05:04 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:52:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static inline bool		parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 	lemin->pipes[rooms_to_connect[1]][rooms_to_connect[0]] = LINKED;
 	return (true);
 }
+
 
 static void				fill_tab_pipes(t_lemin *lemin, t_lst **ptr)
 {

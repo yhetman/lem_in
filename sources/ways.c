@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:20:41 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 22:24:50 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 20:37:58 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static int		count_lines(t_send *sender, t_lemin *lemin)
 	i = -1;
 	ret = 0;
 	while (++i < lemin->flow)
-		ret = sender->len_of_path[i] + sender->ants[i] > ret ?
-		sender->len_of_path[i] + sender->ants[i] : ret;
+	{
+		(ret = sender->len_of_path[i] + sender->ants[i] > ret ?
+		sender->len_of_path[i] + sender->ants[i] : ret);
+	}
 	return (ret);
 }
 
@@ -73,8 +75,13 @@ static int		overflow_of_ants(t_lemin *lemin, t_send *sender, int to_subtract)
 	{
 		i = -1;
 		while (++i < lemin->flow)
-			if (sender->ants[i]-- > 0)
+		{
+			if (sender->ants[i] > 0)
+			{
+				sender->ants[i]--;
 				to_subtract--;
+			}
+		}
 	}
 	return (-to_subtract);
 }
@@ -86,9 +93,9 @@ void	amount_to_depart(t_lemin *lemin, t_send *sender)
 	int	i;
 	int	ants_avg;
 
-	ants_avg = lemin->amount_of_ants / lemin->flow;
 	i = -1;
 	avg = 0;
+	ants_avg = lemin->amount_of_ants / lemin->flow;
 	ants_remaining = lemin->amount_of_ants;
 	while (++i < lemin->flow)
 		avg += sender->len_of_path[i];

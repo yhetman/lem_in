@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 21:25:27 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 21:45:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/03 15:49:56 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool		    send_one_ant(t_lst *peak, t_lemin *l, int i, t_send *s)
 
 	wait = (s->positions[i] == l->begin);
 	((l->flow > 1 && wait) ? (way = another_way(s)) : (way = next_peak(peak)));
-    ft_printf("%s%d%c%s", l->ant_output, i + 1, '-', check_room_name(l, way));
+    ft_printf("%s%d%c%s", "L", i + 1, '-', check_room_name(l, way));
     (i + 1 == s->departed) ? 0 : ft_putchar(' ');
 	s->positions[i] = way;
 	return ((way == l->finish) ? true : false);
