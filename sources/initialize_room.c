@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   peak_step.c                                        :+:      :+:    :+:   */
+/*   initialize_room.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/09 13:11:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 22:09:45 by yhetman          ###   ########.fr       */
+/*   Created: 2019/09/08 18:30:34 by yhetman           #+#    #+#             */
+/*   Updated: 2019/09/08 18:36:12 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int				peak_step(t_lst *peak)
+t_room			*initialize_room(char *name_ptr, char type,
+                t_coord *coord, int ant_amount)
 {
-	int		count;
-	t_dead_end	*dead_end;
+	t_room	*newest;
 
-	count = 0;
-	while (peak)
-	{
-		dead_end = ((t_dead_end*)(peak->content))->reverse;
-		if (dead_end->flow == 1)
-			count++;
-		peak = peak->next;
-	}
-	return (count);
+	newest = ft_memalloc(sizeof(t_room));
+	newest->coord.x = coord->x;
+	newest->coord.y = coord->y;
+	newest->name = name_ptr;
+	newest->type = type;
+	if (type == BEGIN)
+		newest->ant_amount = ant_amount;
+	else
+		newest->ant_amount = 0;
+	newest->next = NULL;
+	return (newest);
 }

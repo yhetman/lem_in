@@ -13,105 +13,49 @@
 #include "../includes/lem_in.h"
 
 
-static bool			room_already_exists(t_room *map, char *room)
+void				shut_down_lemin(t_lst **list, t_lemin *lemin,
+					const char *err_mssg, int exit_code)
 {
-	while (map)
-	{
-		if (!ft_strcmp(map->name, room))
-			return (true);
-		map = map->next;
-	}
-	return (false);
+	ft_lstdel(list, &ft_free_node);
+	clean_lem_in(lemin);
+	ft_putstr_fd(err_mssg, STD_ERR);
+	exit(exit_code);
 }
 
-static bool			remember_begining_finish(t_lemin *lemin, char *name, char type)
+static inline bool	remember_ants(t_lst **list, int *ants)
 {
-	if (type == FINISH)
+	while (((char*)(*list)->content)[0] == HASH)
 	{
-		if (lemin->finish_name)
-		{
-			ft_strdel(&name);
+		if (ft_strequ((char*)(*list)->content, START)
+				|| ft_strequ((char*)(*list)->content, END))
 			return (false);
-		}
-		lemin->finish_name = ft_strdup(name);
+		(*list) = (*list)->next;
 	}
-	else if (type == BEGIN)
+	if (IS_INT((char*)(*list)->content))
 	{
-		if (lemin->begin_name)
-		{
-			ft_strdel(&name);
-			return (false);
-		}
-		lemin->begin_name = ft_strdup(name);
+		*ants = ft_atoi((char*)(*list)->content);
+		return((*ants >= 0) ? true : false);
 	}
-	return (true);
-}
-
-static bool			add_room(t_lemin **lemin, char *input, char type)
-{
-	t_room *new;
-	char	*name;
-	t_coord coord;
-
-	name = room_name(input);
-	if (!name)
-	{
-		ft_strdel(&name);
+	else
 		return (false);
-	}
-	coord = get_coord(input);
-	if (type == BEGIN || type == FINISH)
-		if (!remember_begining_finish(*lemin, name, type))
-			return (false);
-	if ((*lemin)->amount_of_rooms && room_already_exists((*lemin)->amount_of_rooms, name))
-	{
-		ft_strdel(&name);
-		return (false);
-	}
-	new = add_new_room(name, type, &coord, (*lemin)->amount_of_ants);
-	new->next = (*lemin)->amount_of_rooms;
-	(*lemin)->amount_of_rooms = new;
-	return (true);
 }
 
-static inline void	parse_special(t_lst **ptr, char *type, char **str)
-{
-	if (!ft_strcmp(*str, START))
-		*type = BEGIN;
-	else if (!ft_strcmp(*str, END))
-		*type = FINISH;
-	(*ptr) = (*ptr)->next;
-	*str = (char*)((*ptr)->content);
-	while (*str[0] == HASH)
-	{
-		(*ptr) = (*ptr)->next;
-		*str = (char*)((*ptr)->content);
-	}
-}
 
-void				remember_rooms(t_lst **ptr, t_lemin *lemin)
+void				parsing(t_lst **input, t_lst **tmp,
+					t_lemin *lemin)
 {
-	char	type;
-	char	*str;
-
-	while (*ptr)
-	{
-		str = (char*)((*ptr)->content);
-		if (!*str)
-			return ;
-		type = NORM;
-		if (str[0] == HASH)
-		{
-			if (str[1] != HASH)
-			{
-				(*ptr) = (*ptr)->next;
-				continue ;
-			}
-			else
-				parse_special(ptr, &type, &str);
-		}
-		if (!add_room(&lemin, str, type))
-			return ;
-		(*ptr) = (*ptr)->next;
-	}
+	if (!(*input))
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: incorrect input.\n", FAIL);
+	if (!(remember_ants(input, &lemin->ants)))
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: invalid input of ants.\n", FAIL);
+	*input = (*input)->next;
+	remember_rooms(input, lemin);
+	if (!lemin->amount_of_rooms)
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: invalid rooms' declaration.\n", FAIL);
+	if (!lemin->start_name)
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: map has no start room.\n", FAIL);
+	if (!lemin->end_name)
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: map has no end room.\n", FAIL);
+	if (!remember_pipes(input, lemin))
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: wrong pipes' declaration.\n", FAIL);
 }

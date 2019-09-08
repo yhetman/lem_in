@@ -33,7 +33,7 @@ H_FILES		:=	includes/lem_in.h
 DEPS		=	$(H_FILES) Makefile
 TOOLDIR		:=	./tools
 
-all: $(NAME) $(VISU)
+all: $(NAME)
 
 $(LIBFT): force
 	@$(MAKE) -C $(LIBDIR) 2> /dev/null

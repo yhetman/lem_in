@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 17:27:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 21:50:07 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/08 18:35:47 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static bool	check_room_coordinate(char **name)
+static bool		coords_validation(char **name)
 {
 	while (IS_DIGIT(**name))
 		(*name)--;
@@ -22,44 +22,28 @@ static bool	check_room_coordinate(char **name)
 	if (!IS_INT(*name))
 		return (false);
 	(*name)--;
-	return ((**name != ' ') ? false : true);
-}
-
-static bool	room_is_valid(char *name)
-{
-	if (name[0] == 'L' || name[0] == HASH)
-		return (false);
-	name += LEN(name) - 1;
-	if (!check_room_coordinate(&name))
-		return (false);
-	name--;
-	if (!check_room_coordinate(&name))
+	if (**name != ' ')
 		return (false);
 	return (true);
 }
 
-t_room		*add_new_room(char *name_ptr, char type, t_coord *coord,
-			int ant_amount)
+static bool			room_is_valid(char *name)
 {
-	t_room	*new;
-
-	new = ft_memalloc(sizeof(t_room));
-	new->coord.x = coord->x;
-	new->coord.y = coord->y;
-	new->name = name_ptr;
-	new->type = type;
-	if (type == BEGIN)
-		new->ant_amount = ant_amount;
-	else
-		new->ant_amount = 0;
-	new->next = NULL;
-	return (new);
+	if (name[0] == 'L' || name[0] == HASH)
+		return (false);
+	name += LEN(name) - 1;
+	if (!coords_validation(&name))
+		return (false);
+	name--;
+	if (!coords_validation(&name))
+		return (false);
+	return (true);
 }
 
-char		*room_name(char *input)
+char				*find_the_links(char *input)
 {
-	size_t	i;
-	char	*name;
+	size_t			i;
+	char			*name;
 
 	i = LEN(input);
 	if (room_is_valid(input))
@@ -83,17 +67,44 @@ char		*room_name(char *input)
 		return (NULL);
 }
 
-int			check_name_in_list(char *name, t_room *amount_of_rooms)
+static void			validation(t_lst **list, char *type, char **str)
 {
-	int	i;
-
-	i = 0;
-	while (amount_of_rooms)
+	if (!ft_strcmp(*str, START))
+		*type = BEGIN;
+	else if (!ft_strcmp(*str, END))
+		*type = FINISH;
+	(*list) = (*list)->next;
+	*str = (char*)((*list)->content);
+	while (*str[0] == HASH)
 	{
-		if (!ft_strcmp(amount_of_rooms->name, name))
-			return (i);
-		i++;
-		amount_of_rooms = amount_of_rooms->next;
+		(*list) = (*list)->next;
+		*str = (char*)((*list)->content);
 	}
-	return (-1);
+}
+
+void				remember_rooms(t_lst **list, t_lemin *lemin)
+{
+	char			type;
+	char			*str;
+
+	while (*list)
+	{
+		str = (char*)((*list)->content);
+		if (!*str)
+			return ;
+		type = NORM;
+		if (str[0] == HASH)
+		{
+			if (str[1] != HASH)
+			{
+				(*list) = (*list)->next;
+				continue ;
+			}
+			else
+				validation(list, &type, &str);
+		}
+		if (is_valid_room(&lemin, str, type) == false)
+			return ;
+		(*list) = (*list)->next;
+	}
 }

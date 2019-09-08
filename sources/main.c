@@ -12,83 +12,86 @@
 
 #include "../includes/lem_in.h"
 
-static void				delete_map(t_array_of_lists graph, int size)
+static void			clean_map(t_array_of_lists map, int size)
 {
-	int					i;
+	int				i;
 
-	if (!graph || !size)
+	if (!map || !size)
 		return ;
 	i = -1;
 	while (++i < size)
-		if (graph[i])
-			ft_lstdel(&graph[i], &ft_free_node);
-	ft_memdel((void**)&graph);
+	{
+		if (map[i])
+			ft_lstdel(&map[i], &ft_free_node);
+	}
+	ft_memdel((void**)&map);
 }
 
 static t_lst			*read_from_stdin(void)
 {
 	t_lst				*input;
-	char				*l;
-	int					ret;
+	char				*line;
+	int					result;
 
-	l = NULL;
+	line = NULL;
 	input = NULL;
-	while ((ret = ft_backn_gnl(0, &l)))
+	while ((result = ft_backn_gnl(0, &line)))
 	{
-		if (ret == -1 || !IS_ASCII(l[0]))
+		if (result == -1 || !IS_ASCII(line[0]))
 			ft_error_manager("ERROR OCCURED: can't read the file!");
-		ft_lst_last_in(&input, ft_lstnew(l, sizeof(char) * (LEN(l) + 1)));
+		ft_lst_last_in(&input, ft_lstnew(line, sizeof(char) * (LEN(line) + 1)));
 	}
 	return (input);
 }
 
 static t_array_of_lists	ford(t_lemin *lemin)
 {
-	t_array_of_lists	g;
-	int			steps;
-	t_lemin		cpy;
+	int					actions;
+	t_lemin				copy;
+	t_array_of_lists	map;
 
-	ft_memcpy(&cpy, lemin, sizeof(t_lemin));
-	g = construct_this_sht(&cpy);
-	steps = ford_fulkerson(g, &cpy, -1);
-	if (!steps)
+	ft_memcpy(&copy, lemin, sizeof(t_lemin));
+	map = construct_this_sht(&copy);
+	actions = ford_fulkerson(map, &copy, -1);
+	if (!actions)
 	{
-		delete_map(g, cpy.size_of_graph);
+		clean_map(map, copy.size_of_graph);
 		return (NULL);
 	}
-	delete_map(g, cpy.size_of_graph);
-	g = construct_this_sht(lemin);
-	ford_fulkerson(g, lemin, steps);
-	return (g);
+	clean_map(map, copy.size_of_graph);
+	map = construct_this_sht(lemin);
+	ford_fulkerson(map, lemin, actions);
+	return (map);
 }
 
 static void				figure_out_the_solution(t_lemin *lemin)
 {
-	t_lst				**s;
+	t_lst				**solve;
 
-	s = ford(lemin);
-	if (s && lemin->flow > 0)
+	solve = ford(lemin);
+	if (solve && lemin->flow > 0)
 	{
 		ft_putchar_fd('\n', STD_OUT);
 		ft_lstdel(&lemin->len_of_path, &ft_free_node);
-		send_ants(s, lemin);
+		choose_paths(solve, lemin);
 	}
 	else
 		ft_error_manager("ERROR OCCURED!");
-	delete_map(s, lemin->size_of_graph);
+	clean_map(solve, lemin->size_of_graph);
 }
 
-int					main(void)
+int						main(void)
 {
-	t_lst			*input;
-	t_lst			*tmp;
-	t_lemin			lemin;
+	t_lst				*input;
+	t_lst				*temp;
+	t_lemin				lemin;
 
 	ft_bzero(&lemin, sizeof(t_lemin));
 	input = read_from_stdin();
-	tmp = input;
-	parsing(&input, &tmp, &lemin);
-	output_buffer(tmp);
+	temp = input;
+	parsing(&input, &temp, &lemin);
+	output_buffer(temp);
 	figure_out_the_solution(&lemin);
-	shut_the_f_up(&tmp, &lemin, "", SUCCESS);
+	shut_down_lemin(&temp, &lemin, "", SUCCESS);
 }
+

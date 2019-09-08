@@ -42,10 +42,10 @@ typedef struct		s_fdl
 
 typedef struct		s_buffer
 {
-	char	step[BUFF_SIZE];
-	size_t	pos;
-	int		fd;
-	int		printed;
+	char			step[BUFF_SIZE];
+	size_t			pos;
+	int				fd;
+	int				printed;
 }					t_buffer;
 
 
