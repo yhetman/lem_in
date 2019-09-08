@@ -6,12 +6,27 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:54:04 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/08 18:50:46 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
+static void		output_buffer(t_lst *node)
+{
+	t_buffer	buffer;
+
+	buffer.fd = 1;
+	buffer.printed = 0;
+	buffer.pos = 0;
+	while (node)
+	{
+		ft_putstr_buff(&buffer, (char*)node->content);
+		ft_putchr_buff(&buffer, '\n');
+		node = node->next;
+	}
+	ft_flush_buff(&buffer);
+}
 
 void				shut_down_lemin(t_lst **list, t_lemin *lemin,
 					const char *err_mssg, int exit_code)
@@ -58,4 +73,5 @@ void				parsing(t_lst **input, t_lst **tmp,
 		shut_down_lemin(tmp, lemin, "ERROR OCCURED: map has no end room.\n", FAIL);
 	if (!remember_pipes(input, lemin))
 		shut_down_lemin(tmp, lemin, "ERROR OCCURED: wrong pipes' declaration.\n", FAIL);
+	output_buffer(*tmp);
 }

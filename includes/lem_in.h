@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:36:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/08 18:50:56 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,8 @@ void				remember_rooms(t_lst **list, t_lemin *lemin);
 char				*find_the_links(char *input);
 t_room				*initialize_room(char *name_ptr, char type,
                		t_coord *coord, int ant_amount);
+bool				remember_pipes(t_lst **list, t_lemin *lemin);
+bool				parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin);
+void				clean_pipes(char **split);
+
 #endif
