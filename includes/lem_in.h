@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:50:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/09 18:23:57 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,10 @@ t_room				*initialize_room(char *name_ptr, char type,
 bool				remember_pipes(t_lst **list, t_lemin *lemin);
 bool				parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin);
 void				clean_pipes(char **split);
-
+void				clean_info(t_send *sender);
+int					*check_length_of_paths(t_array_of_lists map, t_lemin *lemin);
+bool				send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s);
+void				initialize_send(t_send *sender, t_lemin *lemin, t_lst **map);
+void				count_ants_to_send(t_lemin *lemin, t_send *sender);
+t_array_of_lists	construstor(t_lemin *lemin);
 #endif
