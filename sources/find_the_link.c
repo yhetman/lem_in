@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 20:01:08 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:01:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:13:35 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool		coords_validation(char **name)
 	return (true);
 }
 
-static bool			room_is_valid(char *name)
+static bool     room_is_valid(char *name)
 {
 	if (name[0] == 'L' || name[0] == HASH)
 		return (false);
@@ -40,10 +40,10 @@ static bool			room_is_valid(char *name)
 	return (true);
 }
 
-char				*find_the_links(char *input)
+char			*find_the_links(char *input)
 {
-	size_t			i;
-	char			*name;
+	size_t      i;
+	char	    *name;
 
 	i = LEN(input);
 	if (room_is_valid(input))

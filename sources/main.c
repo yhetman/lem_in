@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:17:59 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:42:01 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,29 @@ static t_lst			*read_from_stdin(void)
 	return (input);
 }
 
-static t_array_of_lists	ford(t_lemin *lemin)
+static t_array_of_lists		ford(t_lemin *lemin)
 {
-	int					actions;
-	t_lemin				copy;
 	t_array_of_lists	map;
+	int			steps;
+	t_lemin		cpy;
 
-	ft_memcpy(&copy, lemin, sizeof(t_lemin));
-	map = constructor(&copy);
-	actions = ford_fulkerson(map, &copy, -1);
-	if (!actions)
+	ft_memcpy(&cpy, lemin, sizeof(t_lemin));
+	map = constructor(&cpy);
+	steps = ford_fulkerson(map, &cpy, -1);
+	if (!steps)
 	{
-		clean_map(map, copy.size_of_graph);
+		clean_map(map, cpy.size_of_graph);
 		return (NULL);
 	}
-	clean_map(map, copy.size_of_graph);
+	clean_map(map, cpy.size_of_graph);
 	map = constructor(lemin);
-	ford_fulkerson(map, lemin, actions);
+	ford_fulkerson(map, lemin, steps);
 	return (map);
 }
 
-static void				figure_out_the_solution(t_lemin *lemin)
+static void			figure_out_the_solution(t_lemin *lemin)
 {
-	t_lst				**solve;
+	t_lst		**solve;
 
 	solve = ford(lemin);
 	if (solve && lemin->flow > 0)
@@ -80,17 +80,16 @@ static void				figure_out_the_solution(t_lemin *lemin)
 	clean_map(solve, lemin->size_of_graph);
 }
 
-int						main(void)
+int				main(void)
 {
-	t_lst				*input;
-	t_lst				*temp;
-	t_lemin				lemin;
+	t_lst		*input;
+	t_lst		*tmp;
+	t_lemin		lemin;
 
 	ft_bzero(&lemin, sizeof(t_lemin));
 	input = read_from_stdin();
-	temp = input;
-	parsing(&input, &temp, &lemin);
-	figure_out_the_solution(&lemin); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	shut_down_lemin(&temp, &lemin, "", SUCCESS);
+	tmp = input;
+	parsing(&input, &tmp, &lemin);
+	figure_out_the_solution(&lemin);
+	shut_down_lemin(&tmp, &lemin, "", SUCCESS);
 }
-

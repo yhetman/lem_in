@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:59:01 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 19:47:37 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:16:31 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,6 @@ static void					bfs_step(t_dead_end ***path, t_lst **traffic_jam, t_lst **map, i
 	*traffic_jam = tmp;
 }
 
-static int          analitics(t_array_of_lists graph, t_lemin *lemin)
-{
-	int		*lengths;
-	int		avg_len;
-	int		result;
-
-	lengths = check_length_of_paths(graph, lemin);
-	avg_len = ft_arr_len(lengths, lemin->flow);
-	result = ((lemin->ants - 1) / lemin->flow + avg_len);
-	ft_lstdel(&lemin->len_of_path, &ft_free_node);
-	ft_memdel((void**)&lengths);
-	return (result);
-}
-
 static t_dead_end		**bfs(t_array_of_lists map, int src, int depth, int size)
 {
 	t_dead_end	**path;
@@ -126,7 +112,9 @@ int                 ford_fulkerson(t_array_of_lists map, t_lemin *lemin, int sto
 		else
 		{
 			lemin->flow++;
-			tmp = analitics(map, lemin);
+			tmp = ((lemin->ants - 1) / lemin->flow +
+            ft_arr_len(check_length_of_paths(map, lemin), lemin->flow));
+            ft_lstdel(&lemin->len_of_path, &ft_free_node);
 			if (tmp < min)
 			{
 				min = tmp;

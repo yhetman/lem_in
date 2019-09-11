@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:10:05 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 21:00:23 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:13:26 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	count_ants_to_send(t_lemin *lemin, t_send *sender)
 	}
 	if (ants_remaining < 0)
 		ants_remaining = too_many_ants_sent(lemin, sender, -ants_remaining);
-	i = -1;
 	if (ants_remaining)
 		ants_remaining = depart_extra_ants(lemin, sender, ants_remaining);
 }

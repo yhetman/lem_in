@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:53:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:05:48 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:17:27 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int      alternative_way(t_send *sender)
 	{
 		sender->ants[elem.post_code]--;
 		ft_lst_last_in(&sender->traffic_jam, ft_lstnew(&elem, sizeof(t_path)));
-		//if (DEBUG)
-		//	ft_printf("DEBUG: Sending ant through path %d.\n", elem.post_code);
 	}
 	else
 		sender->flow--;
@@ -70,8 +68,6 @@ bool	send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s)
 		wait = next_node(node);
 	ft_printf("%s%d%c%s", "L", i + 1, '-', check_guest_list(lemin, wait));
     (i + 1 == s->departed) ? 0 : ft_putchar_fd(' ', STD_OUT);
-	//sprint_ant(i, check_guest_list(lemin, wait),
-	//s		s->departed, "L");
 	s->positions[i] = wait;
 	return ((wait == lemin->finish) ? true : false);
 }

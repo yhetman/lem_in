@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/29 14:18:45 by yhetman           #+#    #+#              #
-#    Updated: 2019/09/11 20:54:51 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/11 21:59:43 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,22 @@ DEBUG	:=	-g3 #-fsanitize=address -fsanitize=undefined -Og
 INCLUDE	:=	-lft -L$(LIBDIR)/
 NAME	:=	lem-in
 SRC_PATH		= 	./sources/
-SRC_NAME	:=	check_length_of_paths.c	 constructor.c	 ford_fulkerson.c \
-				initialize_send.c	 main.c	 parsing.c	  rooms.c find_the_link.c\
-				choose_paths.c	 count_ants_to_send.c	 initialize_room.c \
-				is_valid_room.c	 initialize_pipes.c	 pipes.c  send_one_ant.c	
+SRC_NAME	:=	check_length_of_paths.c	\
+				choose_paths.c			\
+				constructor.c			\
+				count_ants_to_send.c	\
+				find_the_link.c			\
+				ford_fulkerson.c		\
+				initialize_pipes.c		\
+				initialize_room.c		\
+				initialize_send.c		\
+				is_valid_room.c			\
+				parsing.c				\
+				pipes.c					\
+				rooms.c					\
+				send_one_ant.c			\
+				shut_down_lemin.c
+
 SRC			=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_PATH	:= 	./obj/
 OBJ			=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))

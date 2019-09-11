@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:49:12 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:59:59 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:06:50 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	clean_info(t_send *sender)
+static void	free_used_memory(t_send *sender)
 {
 	ft_memdel((void**)&sender->ants);
 	ft_memdel((void**)&sender->len_of_path);
@@ -33,16 +33,13 @@ static void	optimize_the_way(t_send *sender, t_lst *beg, int flow)
 			break ;
 		((!sender->ants[i] && ((t_dead_end*)(beg->content))->flow)
 			? (((t_dead_end*)(beg->content))->flow = 0) : 0);
-			//if (DEBUG)
-			//	ft_printf("DEBUG: Path %d (of flow %d) cleared out.\n", i, ((t_dead_end*)(beg->content))->flow);
-		//i++;
 		((beg->next) ? beg = beg->next : 0);
 	}
 }
 
-void			choose_paths(t_array_of_lists graph, t_lemin *lemin)
+void		choose_paths(t_array_of_lists graph, t_lemin *lemin)
 {
-	int			i;
+	int		i;
 	t_send	sender;
 
 	initialize_send(&sender, lemin, graph);
@@ -53,15 +50,14 @@ void			choose_paths(t_array_of_lists graph, t_lemin *lemin)
 	{
 		if (sender.departed < lemin->ants)
 			sender.departed += sender.flow;
-		i = 0;
+		i = -1;
 		while (++i < sender.departed && i < lemin->ants)
 		{
 			optimize_the_way(&sender, (graph)[lemin->begin], lemin->flow);
 			if (sender.positions[i] != lemin->finish)
 				sender.arrived += send_one_ant(graph[sender.positions[i]], lemin, i, &sender);
-			i++;
 		}
 		ft_putchar_fd('\n', STD_OUT);
 	}
-	clean_info(&sender);
+	free_used_memory(&sender);
 }

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:57:34 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:03:28 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,22 @@ typedef struct		s_lemin
 	t_room			*amount_of_rooms;
 }					t_lemin;
 
-void				parsing(t_lst **input, t_lst **tmp,
-					t_lemin *lemin);
-void				shut_down_lemin(t_lst **list, t_lemin *lemin,
-					const char *err_mssg, int exit_code);
-void				remember_rooms(t_lst **list, t_lemin *lemin);
-bool			    is_valid_room(t_lemin **lemin, char *input, char type);
+int					*check_length_of_paths(t_array_of_lists map, t_lemin *lemin);
+void				choose_paths(t_array_of_lists graph, t_lemin *lemin);
+t_array_of_lists	constructor(t_lemin *lemin);
+void				count_ants_to_send(t_lemin *lemin, t_send *sender);
 char				*find_the_links(char *input);
+int					ford_fulkerson(t_array_of_lists map, t_lemin *lemin, int stop);
+void				initialize_pipes(t_lemin *lemin, t_lst **ptr);
 t_room				*initialize_room(char *name_ptr, char type,
                		t_coord *coord, int ant_amount);
-bool				remember_pipes(t_lst **list, t_lemin *lemin);
-void				initialize_pipes(t_lemin *lemin, t_lst **ptr);
-void				clean_pipes(char **split);
-void				clean_info(t_send *sender);
-void				choose_paths(t_array_of_lists graph, t_lemin *lemin);
-int					*check_length_of_paths(t_array_of_lists map, t_lemin *lemin);
-bool				send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s);
 void				initialize_send(t_send *sender, t_lemin *lemin, t_lst **map);
-void				count_ants_to_send(t_lemin *lemin, t_send *sender);
-t_array_of_lists	constructor(t_lemin *lemin);
-int					ford_fulkerson(t_array_of_lists map, t_lemin *lemin, int stop);
+bool			    is_valid_room(t_lemin **lemin, char *input, char type);
+void				parsing(t_lst **input, t_lst **tmp,
+					t_lemin *lemin);
+bool				remember_pipes(t_lst **list, t_lemin *lemin);
+void				remember_rooms(t_lst **list, t_lemin *lemin);
+bool				send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s);
+void				shut_down_lemin(t_lst **list, t_lemin *lemin,
+					const char *err_mssg, int exit_code);
 #endif

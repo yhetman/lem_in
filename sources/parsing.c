@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 19:57:11 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:58:49 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,6 @@ static void		output_buffer(t_lst *node)
 		node = node->next;
 	}
 	ft_flush_buff(&buffer);
-}
-
-
-static void			clean_rooms(t_room **list)
-{
-	t_room	*temp;
-	t_room	*ptr;
-
-	ptr = *list;
-	while (ptr)
-	{
-		temp = ptr->next;
-		ft_strdel((char**)&ptr->name);
-		ft_memdel((void**)&ptr);
-		ptr = temp;
-	}
-}
-
-void				shut_down_lemin(t_lst **list, t_lemin *lemin,
-					const char *err_mssg, int exit_code)
-{
-	ft_lstdel(list, &ft_free_node);
-	ft_strdel(&lemin->start_name);
-	ft_strdel(&lemin->end_name);
-	clean_rooms(&(lemin)->amount_of_rooms);
-	clean_pipes(lemin->pipes);
-	ft_putstr_fd(err_mssg, STD_ERR);
-	exit(exit_code);
 }
 
 static inline bool	remember_ants(t_lst **list, int *ants)
