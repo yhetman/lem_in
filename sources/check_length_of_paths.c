@@ -6,9 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:03:20 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:07:04 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 19:39:26 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/lem_in.h"
 
 static int			next_top(t_lst *node)
 {

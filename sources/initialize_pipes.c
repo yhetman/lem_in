@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_pipes.c                                      :+:      :+:    :+:   */
+/*   initialize_pipes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:46:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:48:08 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:48:17 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int  numeration_of_rooms(char *name, t_room *amount_of_rooms)
 	return (-1);
 }
 
-bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
+static bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 {
 	int		rooms_to_connect[2];
 
@@ -68,4 +68,23 @@ bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 	lemin->pipes[rooms_to_connect[0]][rooms_to_connect[1]] = LINKED;
 	lemin->pipes[rooms_to_connect[1]][rooms_to_connect[0]] = LINKED;
 	return (true);
+}
+
+void		initialize_pipes(t_lemin *lemin, t_lst **ptr)
+{
+	char        **split;
+
+	while (*ptr)
+	{
+		if (((char*)(*ptr)->content)[0] == HASH)
+		{
+			(*ptr) = (*ptr)->next;
+			continue ;
+		}
+		split = ft_strsplit((char *)(*ptr)->content, '-');
+		if (!parse_pipes(ptr, &split, lemin))
+			break ;
+		*ptr = (*ptr)->next;
+		clean_pipes(split);
+	}
 }

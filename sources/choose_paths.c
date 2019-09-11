@@ -6,9 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:49:12 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:17:29 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:59:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/lem_in.h"
 
 void	clean_info(t_send *sender)
 {
@@ -52,7 +54,7 @@ void			choose_paths(t_array_of_lists graph, t_lemin *lemin)
 		if (sender.departed < lemin->ants)
 			sender.departed += sender.flow;
 		i = 0;
-		while (i < sender.departed && i < lemin->ants)
+		while (++i < sender.departed && i < lemin->ants)
 		{
 			optimize_the_way(&sender, (graph)[lemin->begin], lemin->flow);
 			if (sender.positions[i] != lemin->finish)
@@ -60,8 +62,6 @@ void			choose_paths(t_array_of_lists graph, t_lemin *lemin)
 			i++;
 		}
 		ft_putchar_fd('\n', STD_OUT);
-		//if (DEBUG)
-		//	print_paths_info(&sender, lemin->flow);
 	}
 	clean_info(&sender);
 }

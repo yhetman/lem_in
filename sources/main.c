@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 18:58:21 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:17:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int						main(void)
 	input = read_from_stdin();
 	temp = input;
 	parsing(&input, &temp, &lemin);
-	//output_buffer(temp);
 	figure_out_the_solution(&lemin); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	shut_down_lemin(&temp, &lemin, "", SUCCESS);
 }

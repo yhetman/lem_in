@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:10:05 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:14:04 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 21:00:23 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static bool     case_one_ant(t_šlemin *lemin, t_send *sender)
+static bool     case_one_ant(t_lemin *lemin, t_send *sender)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:33:26 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:38:32 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:43:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,24 @@ static bool		    find_start_and_end(t_lemin *lemin,
 	return (true);
 }
 
+static void		free_splitted(char **split)
+{
+	char	**temp;
+	char	**back;
+
+	if (!split)
+		return ;
+	temp = split;
+	back = split;
+	while (*split)
+	{
+		temp = split + 1;
+		ft_strdel(split);
+		split = temp;
+	}
+	ft_memdel((void**)&back);
+}
+
 static t_coord		remember_coords(char *input)
 {
 	int				i;
@@ -63,7 +81,7 @@ static t_coord		remember_coords(char *input)
 		coord.x = ft_atoi(splitted[i - 3]);
 		coord.y = ft_atoi(splitted[i - 2]);
 	}
-	clean_pipes(splitted);
+	free_splitted(splitted);
 	return (coord);
 }
 

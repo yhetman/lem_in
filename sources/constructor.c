@@ -6,19 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:21:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 18:57:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:56:42 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-static void         initialize_nodes(t_dead_end *edge, int src, int depth)
-{
-	edge->src = src;
-	edge->depth = depth;
-	edge->flow = 0;
-	edge->reverse = NULL;
-}
 
 static void			linking_the_nodes(t_lst **nodes, int count, char *links)
 {
@@ -30,7 +22,10 @@ static void			linking_the_nodes(t_lst **nodes, int count, char *links)
 	{
 		if (links[i] == LINKED)
 		{
-			initialize_nodes(&tmp, count, i);
+			tmp.src = count;
+			tmp.depth = i;
+			tmp.flow = 0;
+			tmp.reverse = NULL;
 			ft_lst_last_in(nodes, ft_lstnew(&tmp, sizeof(t_dead_end)));
 		}
 	}

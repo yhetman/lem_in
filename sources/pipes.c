@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:40:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:46:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 20:51:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static void     fill_diagonal_types(t_lemin *lemin)
+static void     diagonal_neighbour(t_lemin *lemin)
 {
 	int	        i;
     t_room      *tmp;
@@ -26,25 +26,6 @@ static void     fill_diagonal_types(t_lemin *lemin)
 		i++;
 	}
 	lemin->amount_of_rooms = tmp;
-}
-
-static void		fill_tab_pipes(t_lemin *lemin, t_lst **ptr)
-{
-	char        **split;
-
-	while (*ptr)
-	{
-		if (((char*)(*ptr)->content)[0] == HASH)
-		{
-			(*ptr) = (*ptr)->next;
-			continue ;
-		}
-		split = ft_strsplit((char *)(*ptr)->content, '-');
-		if (!parse_pipes(ptr, &split, lemin))
-			break ;
-		*ptr = (*ptr)->next;
-		clean_pipes(split);
-	}
 }
 
 static int      find_right_rooms(char **matrix, int aim)
@@ -83,8 +64,8 @@ bool			remember_pipes(t_lst **list, t_lemin *lemin)
 		ft_memset(lemin->pipes[i], NORM, sizeof(char) * (nb_rooms));
 	}
 	lemin->size_of_graph = nb_rooms;
-	fill_diagonal_types(lemin);
-	fill_tab_pipes(lemin, list);
+	diagonal_neighbour(lemin);
+	initialize_pipes(lemin, list);
 	lemin->begin = find_right_rooms(lemin->pipes, BEGIN);
 	lemin->finish = find_right_rooms(lemin->pipes, FINISH);
 	while (--i >= 0 && !has_one_pipe)
