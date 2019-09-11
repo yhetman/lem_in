@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:21:07 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 18:58:21 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_array_of_lists	ford(t_lemin *lemin)
 	t_array_of_lists	map;
 
 	ft_memcpy(&copy, lemin, sizeof(t_lemin));
-	map = construstor(&copy);
+	map = constructor(&copy);
 	actions = ford_fulkerson(map, &copy, -1);
 	if (!actions)
 	{
@@ -59,7 +59,7 @@ static t_array_of_lists	ford(t_lemin *lemin)
 		return (NULL);
 	}
 	clean_map(map, copy.size_of_graph);
-	map = construstor(lemin);
+	map = constructor(lemin);
 	ford_fulkerson(map, lemin, actions);
 	return (map);
 }

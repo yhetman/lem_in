@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   construstor.c                                      :+:      :+:    :+:   */
+/*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:21:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/09 18:24:04 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/11 18:57:56 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void			reverse_nodes(t_lst **map, int apex)
 	}
 }
 
-t_array_of_lists	construstor(t_lemin *lemin)
+t_array_of_lists	constructor(t_lemin *lemin)
 {
 	int			apex;
 	char		**connections_matrix;
