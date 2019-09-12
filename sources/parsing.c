@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 21:58:49 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 20:29:32 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static void		output_buffer(t_lst *node)
+void		output_buffer(t_lst *node)
 {
 	t_buffer	buffer;
 
@@ -57,12 +57,11 @@ void				parsing(t_lst **input, t_lst **tmp,
 	*input = (*input)->next;
 	remember_rooms(input, lemin);
 	if (!lemin->amount_of_rooms)
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED: invalid rooms' declaration.\n", FAIL);
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: invalid amount of rooms.\n", FAIL);
 	if (!lemin->start_name)
 		shut_down_lemin(tmp, lemin, "ERROR OCCURED: map has no start room.\n", FAIL);
 	if (!lemin->end_name)
 		shut_down_lemin(tmp, lemin, "ERROR OCCURED: map has no end room.\n", FAIL);
 	if (!remember_pipes(input, lemin))
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED: wrong pipes' declaration.\n", FAIL);
-	output_buffer(*tmp);
+		shut_down_lemin(tmp, lemin, "ERROR OCCURED: wrong declaration of rooms or links.\n", FAIL);
 }

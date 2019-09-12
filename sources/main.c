@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 21:42:01 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 20:25:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_lst			*read_from_stdin(void)
 	while ((result = ft_backn_gnl(0, &line)))
 	{
 		if (result == -1 || !IS_ASCII(line[0]))
-			ft_error_manager("ERROR OCCURED: can't read the file!");
+			ft_error_manager("ERROR OCCURED: can't read the file!\n");
 		ft_lst_last_in(&input, ft_lstnew(line, sizeof(char) * (LEN(line) + 1)));
 	}
 	return (input);
@@ -64,19 +64,20 @@ static t_array_of_lists		ford(t_lemin *lemin)
 	return (map);
 }
 
-static void			figure_out_the_solution(t_lemin *lemin)
+static void			figure_out_the_solution(t_lst **buffer, t_lemin *lemin)
 {
 	t_lst		**solve;
 
 	solve = ford(lemin);
 	if (solve && lemin->flow > 0)
 	{
+		output_buffer(*buffer);
 		ft_putchar_fd('\n', STD_OUT);
 		ft_lstdel(&lemin->len_of_path, &ft_free_node);
 		choose_paths(solve, lemin);
 	}
 	else
-		ft_error_manager("ERROR OCCURED!");
+		ft_error_manager("ERROR OCCURED!\n");
 	clean_map(solve, lemin->size_of_graph);
 }
 
@@ -90,6 +91,7 @@ int				main(void)
 	input = read_from_stdin();
 	tmp = input;
 	parsing(&input, &tmp, &lemin);
-	figure_out_the_solution(&lemin);
+	figure_out_the_solution(&tmp, &lemin);
 	shut_down_lemin(&tmp, &lemin, "", SUCCESS);
+	system("leaks lem-in");
 }

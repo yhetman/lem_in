@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:58:12 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 22:17:30 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 18:52:54 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void		shut_down_lemin(t_lst **list, t_lemin *lemin,
 	clean_rooms(&(lemin)->amount_of_rooms);
 	clean_links(lemin->pipes);
 	ft_putstr_fd(err_mssg, STD_ERR);
+	system("leaks lem-in");
 	exit(exit_code);
 }

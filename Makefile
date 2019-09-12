@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/29 14:18:45 by yhetman           #+#    #+#              #
-#    Updated: 2019/09/11 21:59:43 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/12 19:35:56 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS	:=	-Wall -Wextra -Werror
 LIBDIR	:=	./libft
 LIBFT	:=	$(LIBDIR)/libft.a
 BFLAGS	:=	-I$(LIBDIR)/ -Iinclude
-DEBUG	:=	-g3 #-fsanitize=address -fsanitize=undefined -Og
+DEBUG	:=	-g3 -fsanitize=address -fsanitize=undefined -Og
 INCLUDE	:=	-lft -L$(LIBDIR)/
 NAME	:=	lem-in
 SRC_PATH		= 	./sources/
@@ -33,6 +33,7 @@ SRC_NAME	:=	check_length_of_paths.c	\
 				parsing.c				\
 				pipes.c					\
 				rooms.c					\
+				free_leaks_in_check_len.c \
 				send_one_ant.c			\
 				shut_down_lemin.c
 
@@ -53,10 +54,10 @@ $(LIBFT): force
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(DEPS)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(BFLAGS) $< -c -o $@ $(DEBUG)
+	$(CC) $(CFLAGS) $(BFLAGS) $< -c -o $@ 
 
 $(NAME): $(DEPS) $(LIBFT) $(OBJ) $(MAINO)
-	$(CC) $(CFLAGS) $(BFLAGS) $(INCLUDE) $(OBJ) $(MAINO) $(DEBUG) -o $@
+	$(CC) $(CFLAGS) $(BFLAGS) $(INCLUDE) $(OBJ) $(MAINO) -o $@
 clean:
 	$(MAKE) clean -C $(LIBDIR)
 	$(RM) $(OBJ)

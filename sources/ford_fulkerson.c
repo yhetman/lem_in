@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:59:01 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 22:16:31 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 19:34:11 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,7 @@ int                 ford_fulkerson(t_array_of_lists map, t_lemin *lemin, int sto
 		else
 		{
 			lemin->flow++;
-			tmp = ((lemin->ants - 1) / lemin->flow +
-            ft_arr_len(check_length_of_paths(map, lemin), lemin->flow));
-            ft_lstdel(&lemin->len_of_path, &ft_free_node);
+			tmp = free_leaks_in_check_len(lemin, map);
 			if (tmp < min)
 			{
 				min = tmp;

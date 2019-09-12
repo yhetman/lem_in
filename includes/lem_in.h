@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 13:41:25 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 22:03:28 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 20:19:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct		s_lemin
 }					t_lemin;
 
 int					*check_length_of_paths(t_array_of_lists map, t_lemin *lemin);
+int					free_leaks_in_check_len(t_lemin *lemin, t_array_of_lists map);
 void				choose_paths(t_array_of_lists graph, t_lemin *lemin);
 t_array_of_lists	constructor(t_lemin *lemin);
 void				count_ants_to_send(t_lemin *lemin, t_send *sender);
@@ -97,4 +98,5 @@ void				remember_rooms(t_lst **list, t_lemin *lemin);
 bool				send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s);
 void				shut_down_lemin(t_lst **list, t_lemin *lemin,
 					const char *err_mssg, int exit_code);
+void				output_buffer(t_lst *node);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:54:22 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:27:24 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/12 20:04:30 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static t_lst	*solve_jam(t_send *sender, t_lst *start_node, int flow)
 		trajectory.traffic = ((t_dead_end*)(start_node)->content);
 		trajectory.post_code = i;
 		ft_lst_last_in(&traffic_jam, ft_lstnew(&trajectory, sizeof(t_path)));
-		//if (DEBUG > 1)
-		//	ft_printf("DEBUG: Queued path %d: %d->%d.\n", i, ((t_dead_end*)(start_node)->content)->src,((t_dead_end*)(start_node)->content)->depth);
 		i++;
 		start_node = start_node->next;
 	}

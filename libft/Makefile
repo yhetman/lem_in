@@ -6,13 +6,13 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/08/31 21:34:37 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/12 18:54:36 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT_FUNCTIONS = 	ft_display ft_rgb_to_int ft_error_manager \
 					ft_itoa ft_atoi ft_htoi ft_lstadd ft_lstiter ft_lstdel \
