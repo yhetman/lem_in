@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:49:12 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 20:11:50 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/14 19:48:26 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void		choose_paths(t_array_of_lists graph, t_lemin *lemin)
 		{
 			optimize_the_way(&sender, (graph)[lemin->begin], lemin->flow);
 			if (sender.positions[i] != lemin->finish)
-				sender.arrived += send_one_ant(graph[sender.positions[i]], lemin, i, &sender);
+				sender.arrived += send_one_ant(graph[sender.positions[i]],
+						lemin, i, &sender);
 		}
 		ft_putchar_fd('\n', STD_OUT);
 	}

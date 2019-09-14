@@ -6,14 +6,14 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:30:34 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/08 18:36:12 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/14 20:04:34 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_room			*initialize_room(char *name_ptr, char type,
-                t_coord *coord, int ant_amount)
+t_room		*initialize_room(char *name_ptr, char type,
+			t_coord *coord, int ant_amount)
 {
 	t_room	*newest;
 

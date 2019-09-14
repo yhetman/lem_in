@@ -6,15 +6,15 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:10:05 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 20:04:18 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/14 20:01:22 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static bool     case_one_ant(t_lemin *lemin, t_send *sender)
+static bool	case_one_ant(t_lemin *lemin, t_send *sender)
 {
-	int	i;
+	int		i;
 
 	i = -1;
 	while (++i < lemin->flow)
@@ -28,10 +28,10 @@ static bool     case_one_ant(t_lemin *lemin, t_send *sender)
 	return (false);
 }
 
-static int		count_required_lines(t_send *sender, t_lemin *lemin)
+static int	count_required_lines(t_send *sender, t_lemin *lemin)
 {
-	int	result;
-	int	i;
+	int		result;
+	int		i;
 
 	i = -1;
 	result = 0;
@@ -41,10 +41,10 @@ static int		count_required_lines(t_send *sender, t_lemin *lemin)
 	return (result);
 }
 
-static int		depart_extra_ants(t_lemin *lemin, t_send *sender, int to_add)
+static int	depart_extra_ants(t_lemin *lemin, t_send *sender, int to_add)
 {
-	int	i;
-	int	lines;
+	int		i;
+	int		lines;
 
 	if (lemin->ants == 1)
 		if (case_one_ant(lemin, sender))
@@ -66,9 +66,10 @@ static int		depart_extra_ants(t_lemin *lemin, t_send *sender, int to_add)
 	}
 	return (0);
 }
-static int		too_many_ants_sent(t_lemin *lemin, t_send *sender, int to_subtract)
+
+static int	too_many_ants_sent(t_lemin *lemin, t_send *sender, int to_subtract)
 {
-	int	i;
+	int		i;
 
 	while (to_subtract > 0)
 	{
@@ -85,12 +86,12 @@ static int		too_many_ants_sent(t_lemin *lemin, t_send *sender, int to_subtract)
 	return (-to_subtract);
 }
 
-void	count_ants_to_send(t_lemin *lemin, t_send *sender)
+void		count_ants_to_send(t_lemin *lemin, t_send *sender)
 {
-	int	avg;
-	int	ants_remaining;
-	int	i;
-	int	ants_avg;
+	int		avg;
+	int		ants_remaining;
+	int		i;
+	int		ants_avg;
 
 	ants_avg = lemin->ants / lemin->flow;
 	i = -1;
