@@ -6,12 +6,11 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:27:51 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:30:16 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:14:24 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-int		ft_arr_len(int *tab, int len)
+int			ft_arr_len(int *tab, int len)
 {
 	int		res;
 	int		i;

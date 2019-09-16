@@ -6,15 +6,15 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 08:41:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 20:25:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:43:55 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static void			clean_map(t_array_of_lists map, int size)
+static void				clean_map(t_array_of_lists map, int size)
 {
-	int				i;
+	int					i;
 
 	if (!map || !size)
 		return ;
@@ -27,14 +27,10 @@ static void			clean_map(t_array_of_lists map, int size)
 	ft_memdel((void**)&map);
 }
 
-static t_lst			*read_from_stdin(void)
+static t_lst			*read_from_stdin(char *line, t_lst *input)
 {
-	t_lst				*input;
-	char				*line;
 	int					result;
 
-	line = NULL;
-	input = NULL;
 	while ((result = ft_backn_gnl(0, &line)))
 	{
 		if (result == -1 || !IS_ASCII(line[0]))
@@ -44,11 +40,10 @@ static t_lst			*read_from_stdin(void)
 	return (input);
 }
 
-static t_array_of_lists		ford(t_lemin *lemin)
+static t_array_of_lists	ford(t_lemin *lemin, int steps)
 {
+	t_lemin				cpy;
 	t_array_of_lists	map;
-	int			steps;
-	t_lemin		cpy;
 
 	ft_memcpy(&cpy, lemin, sizeof(t_lemin));
 	map = constructor(&cpy);
@@ -64,11 +59,11 @@ static t_array_of_lists		ford(t_lemin *lemin)
 	return (map);
 }
 
-static void			figure_out_the_solution(t_lst **buffer, t_lemin *lemin)
+static void				figure_out_the_solution(t_lst **buffer, t_lemin *lemin)
 {
-	t_lst		**solve;
+	t_lst				**solve;
 
-	solve = ford(lemin);
+	solve = ford(lemin, 0);
 	if (solve && lemin->flow > 0)
 	{
 		output_buffer(*buffer);
@@ -81,17 +76,17 @@ static void			figure_out_the_solution(t_lst **buffer, t_lemin *lemin)
 	clean_map(solve, lemin->size_of_graph);
 }
 
-int				main(void)
+int						main(void)
 {
-	t_lst		*input;
-	t_lst		*tmp;
-	t_lemin		lemin;
+	t_lst				*input;
+	t_lst				*tmp;
+	t_lemin				lemin;
 
-	ft_bzero(&lemin, sizeof(t_lemin));
-	input = read_from_stdin();
+	input = read_from_stdin(NULL, NULL);
 	tmp = input;
+	ft_bzero(&lemin, sizeof(t_lemin));
 	parsing(&input, &tmp, &lemin);
 	figure_out_the_solution(&tmp, &lemin);
 	shut_down_lemin(&tmp, &lemin, "", SUCCESS);
-	system("leaks lem-in");
+	return (1);
 }

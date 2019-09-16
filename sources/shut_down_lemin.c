@@ -6,18 +6,14 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:58:12 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 18:52:54 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:59:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-
-static void clean_rooms(t_room **list)
+static void	clean_rooms(t_room **list, t_room *temp, t_room *ptr)
 {
-	t_room	*temp;
-	t_room	*ptr;
-
 	ptr = *list;
 	while (ptr)
 	{
@@ -28,11 +24,8 @@ static void clean_rooms(t_room **list)
 	}
 }
 
-static void	clean_links(char **split)
+static void	clean_links(char **split, char **temp, char **ptr)
 {
-	char	**temp;
-	char	**ptr;
-
 	if (!split)
 		return ;
 	temp = split;
@@ -52,9 +45,8 @@ void		shut_down_lemin(t_lst **list, t_lemin *lemin,
 	ft_lstdel(list, &ft_free_node);
 	ft_strdel(&lemin->start_name);
 	ft_strdel(&lemin->end_name);
-	clean_rooms(&(lemin)->amount_of_rooms);
-	clean_links(lemin->pipes);
+	clean_rooms(&(lemin)->amount_of_rooms, NULL, NULL);
+	clean_links(lemin->pipes, NULL, NULL);
 	ft_putstr_fd(err_mssg, STD_ERR);
-	system("leaks lem-in");
 	exit(exit_code);
 }

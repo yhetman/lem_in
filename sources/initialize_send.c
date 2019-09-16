@@ -6,19 +6,17 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:54:22 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 20:04:30 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:28:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static t_lst	*solve_jam(t_send *sender, t_lst *start_node, int flow)
+static t_lst	*solve_jam(t_send *sender, t_lst *start_node, int flow, int i)
 {
-	t_lst			*traffic_jam;
-	int				i;
-	t_path	trajectory;
+	t_lst		*traffic_jam;
+	t_path		trajectory;
 
-	i = 0;
 	traffic_jam = NULL;
 	while (1)
 	{
@@ -37,9 +35,9 @@ static t_lst	*solve_jam(t_send *sender, t_lst *start_node, int flow)
 	return (traffic_jam);
 }
 
-static void     cut_off_deads(t_send *sender, t_lst *beg, int flow)
+static void		cut_off_deads(t_send *sender, t_lst *beg, int flow)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < flow && beg)
@@ -56,8 +54,8 @@ static void     cut_off_deads(t_send *sender, t_lst *beg, int flow)
 
 static int		check_overflow(t_send *sender, int flow)
 {
-	int	i;
-	int res;
+	int			i;
+	int			res;
 
 	res = 0;
 	i = -1;
@@ -69,7 +67,7 @@ static int		check_overflow(t_send *sender, int flow)
 	return (res);
 }
 
-void	initialize_send(t_send *sender, t_lemin *lemin, t_lst **map)
+void			initialize_send(t_send *sender, t_lemin *lemin, t_lst **map)
 {
 	ft_bzero(sender, sizeof(t_send));
 	sender->positions = ft_memalloc(sizeof(int) * (lemin->ants));
@@ -79,5 +77,5 @@ void	initialize_send(t_send *sender, t_lemin *lemin, t_lst **map)
 	count_ants_to_send(lemin, sender);
 	sender->flow = check_overflow(sender, lemin->flow);
 	cut_off_deads(sender, (map)[lemin->begin], lemin->flow);
-	sender->traffic_jam = solve_jam(sender, map[lemin->begin], lemin->flow);
+	sender->traffic_jam = solve_jam(sender, map[lemin->begin], lemin->flow, 0);
 }

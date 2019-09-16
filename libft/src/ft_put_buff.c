@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_bufferf.c                                      :+:      :+:    :+:   */
+/*   ft_put_buff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/14 20:39:23 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:46:11 by yhetman          ###   ########.fr       */
+/*   Created: 2019/09/16 16:31:31 by yhetman           #+#    #+#             */
+/*   Updated: 2019/09/16 16:31:57 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void			ft_flush_buff(t_buffer *buf)
+void	ft_flush_buff(t_buffer *buf)
 {
 	if (buf->pos)
 	{
@@ -21,16 +21,16 @@ void			ft_flush_buff(t_buffer *buf)
 	}
 }
 
-void            ft_putchr_buff(t_buffer *buff, char c)
+void	ft_putchr_buff(t_buffer *buff, char c)
 {
-    buff->step[buff->pos] = c;
+	buff->step[buff->pos] = c;
 	buff->pos++;
 	buff->printed++;
 	if (buff->pos == BUFF_SIZE)
 		ft_flush_buff(buff);
 }
 
-void			ft_putstr_buff(t_buffer *buf, char *str)
+void	ft_putstr_buff(t_buffer *buf, char *str)
 {
 	while (*str)
 	{
@@ -39,7 +39,7 @@ void			ft_putstr_buff(t_buffer *buf, char *str)
 	}
 }
 
-void			ft_putnstr_buff(t_buffer *buf, char *str, int n)
+void	ft_putnstr_buff(t_buffer *buf, char *str, int n)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void			ft_putnstr_buff(t_buffer *buf, char *str, int n)
 	}
 }
 
-void			ft_repeat_buff(t_buffer *buf, char c, int n)
+void	ft_repeat_buff(t_buffer *buf, char c, int n)
 {
 	while (n)
 	{

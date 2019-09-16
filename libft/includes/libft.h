@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:39:33 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/31 21:30:51 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:12:34 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		ft_lstdel(t_lst **alst, void(*del)(void*, size_t));
 void		ft_lstdelone(t_lst **alst, void(*del)(void *, size_t));
 t_lst		*ft_lstnew(void const *content, size_t content_size);
 t_lst		*ft_lstmap(t_lst *lst, t_lst *(*f)(t_lst *elem));
-//t_lst		*ft_lstsort(t_lst *lst, int (*cmp)(int, int));
+t_lst		*ft_lstsort(t_lst *lst, int (*cmp)(int, int));
 t_lst		*ft_lstpush(t_lst *first, void *item);
 void		ft_lstforeach(t_lst *lst, void (*function)());
 void		ft_lst_rec_free(t_lst *first);
@@ -119,7 +119,7 @@ wchar_t		*ft_wstrsub(wchar_t const *s,
 			unsigned int begin, size_t len);
 wchar_t		*ft_wstrncpy(wchar_t *dest, const wchar_t *src, size_t n);
 /*
-**	functions to count length 
+**			functions to count length
 */
 size_t		ft_nbrlen(int n);
 int			ft_strclen(const char *s, char c);
@@ -133,7 +133,7 @@ int			ft_ulen_base(unsigned int nbr, int base);
 int			ft_arr_len(int *tab, int len);
 int			ft_min_arr(int *arr, int size);
 /*
-**	memory management
+**			memory management
 */
 void		ft_memdel(void **ap);
 void		*ft_memalloc(size_t size);
@@ -146,7 +146,7 @@ void		*ft_memmove(void *destination,
 			const void *source, size_t n);
 void		*ft_memset(void *b, int c, size_t n);
 /*
-**	functions to check chars according to ASCII table
+**			functions to check chars according to ASCII table
 */
 int			ft_isalpha(int ch);
 int			ft_isprint(int ch);
@@ -158,11 +158,9 @@ bool		ft_isflag(const char *arg);
 bool		ft_isdash(char check);
 int			ft_tolower(int ch);
 int			ft_toupper(int ch);
-
 /*
-**	buffering functions
+**			buffering functions
 */
-
 void		ft_flush_buff(t_buffer *buf);
 void		ft_putchr_buff(t_buffer *buf, char c);
 void		ft_putstr_buff(t_buffer *buf, char *str);
@@ -171,28 +169,28 @@ void		ft_putnstr_buff(t_buffer *buf, char *str, int n);
 void		ft_putchr_buff_unicode(t_buffer *buf, wchar_t uchar);
 void		ft_putstr_buff_unicode(t_buffer *buf, wchar_t *ustr);
 void		ft_putnstr_buff_unicode(t_buffer *buf, wchar_t *ustr, int n);
-
 /*
-**	mathematical functions
-*/ 
+**			mathematical functions
+*/
 int			*ft_range(int first, int last);
 void		ft_swap(int *a, int *b);
 double		ft_pow(double n, int power);
 /*
-**	get_next_line
+**			get_next_line
 */
 int			get_next_line(const int fd, char **line);
 int			ft_backn_gnl(const int fd, char **line);
 /*
-**	free functions
+**			free functions
 */
 void		ft_free_grid(char ***grid);
-void    	ft_free_2d_arr(void **line);
+void		ft_free_2d_arr(void **line);
 void		ft_free_node(void *ptr, size_t size);
 /*
-**	graphical functions to work with mlx
+**			graphical functions to work with mlx
 */
-//void		ft_init_image(void *mlx, t_image *image);
+void		ft_init_image(void *mlx, t_image *image);
 double		ft_gradient(int first, int second, double percent);
-double  	ft_grad_percent(int val, int first, int second);
+double		ft_grad_percent(int val, int first, int second);
+
 #endif

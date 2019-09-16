@@ -6,16 +6,16 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:59:01 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 19:34:11 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:17:24 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static int		jam_appearing(t_lst *node)
+static int			jam_appearing(t_lst *node)
 {
-	int			count;
-	t_dead_end	*dead;
+	int				count;
+	t_dead_end		*dead;
 
 	count = 0;
 	while (node)
@@ -29,37 +29,38 @@ static int		jam_appearing(t_lst *node)
 }
 
 static bool			ants_to_one_path(t_array_of_lists map,
-				t_dead_end **path, int start, int end)
+					t_dead_end **path, int start, int end)
 {
-	t_dead_end	*dead;
-	bool		jam;
+	t_dead_end		*dead;
+	bool			jam;
 
 	jam = false;
 	dead = path[end];
-    dead->flow += 1;
-    dead->reverse->flow -= 1;
+	dead->flow += 1;
+	dead->reverse->flow -= 1;
 	if (dead->src == start)
 		return (false);
 	dead = path[dead->src];
 	while (dead->src != start && !jam)
 	{
 		dead->flow += 1;
-        dead->reverse->flow -= 1;
+		dead->reverse->flow -= 1;
 		if ((jam = jam_appearing(map[dead->depth]) > 1))
 			break ;
 		dead = path[dead->src];
 	}
 	dead->flow += 1;
-    dead->reverse->flow -= 1;
+	dead->reverse->flow -= 1;
 	return (jam);
 }
 
-static void					bfs_step(t_dead_end ***path, t_lst **traffic_jam, t_lst **map, int src)
+static void			bfs_step(t_dead_end ***path, t_lst **traffic_jam,
+					t_lst **map, int src)
 {
-	t_lst	*curr;
-	t_dead_end	*dead;
-	int		point;
-	t_lst	*tmp;
+	t_lst			*curr;
+	t_dead_end		*dead;
+	int				point;
+	t_lst			*tmp;
 
 	point = *(int*)(*traffic_jam)->content;
 	curr = map[point];
@@ -78,10 +79,10 @@ static void					bfs_step(t_dead_end ***path, t_lst **traffic_jam, t_lst **map, i
 	*traffic_jam = tmp;
 }
 
-static t_dead_end		**bfs(t_array_of_lists map, int src, int depth, int size)
+static t_dead_end	**bfs(t_array_of_lists map, int src, int depth, int size)
 {
-	t_dead_end	**path;
-	t_lst		*traffic_jam;
+	t_dead_end		**path;
+	t_lst			*traffic_jam;
 
 	path = ft_memalloc(sizeof(t_dead_end*) * size);
 	traffic_jam = ft_lstnew(&src, sizeof(int));
@@ -95,12 +96,13 @@ static t_dead_end		**bfs(t_array_of_lists map, int src, int depth, int size)
 	return (path);
 }
 
-int                 ford_fulkerson(t_array_of_lists map, t_lemin *lemin, int stop)
+int					ford_fulkerson(t_array_of_lists map,
+					t_lemin *lemin, int stop)
 {
-	t_dead_end	**path;
-	int		result;
-	int		tmp;
-	int		min;
+	t_dead_end		**path;
+	int				result;
+	int				tmp;
+	int				min;
 
 	min = INT_MAX;
 	result = 0;

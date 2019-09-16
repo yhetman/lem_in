@@ -6,15 +6,15 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:42:23 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:08:54 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:18:58 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static char	*ft_strrealloc(char *str, size_t size)
+static char		*ft_strrealloc(char *str, size_t size)
 {
-	char	*mem;
+	char		*mem;
 
 	mem = ft_strnew(size);
 	if (str)
@@ -25,9 +25,9 @@ static char	*ft_strrealloc(char *str, size_t size)
 	return (mem);
 }
 
-static void	free_cat(char **gnl, char *tmp)
+static void		free_cat(char **gnl, char *tmp)
 {
-	size_t	combined_size;
+	size_t		combined_size;
 
 	if (!tmp || !(*tmp))
 		return ;
@@ -39,10 +39,10 @@ static void	free_cat(char **gnl, char *tmp)
 	*gnl = ft_strcat(*gnl, tmp);
 }
 
-static void	get_one_line(char **gnl, char **line)
+static void		get_one_line(char **gnl, char **line)
 {
-	int		split;
-	char	*tmp;
+	int			split;
+	char		*tmp;
 
 	if (!gnl)
 		return ;
@@ -62,11 +62,11 @@ static void	get_one_line(char **gnl, char **line)
 	}
 }
 
-int			ft_backn_gnl(const int fd, char **line)
+int				ft_backn_gnl(const int fd, char **line)
 {
-	static char		*gnl[OPEN_MAX];
-	char			buf[BUFF_SIZE + 1];
-	int				ret;
+	static char	*gnl[OPEN_MAX];
+	char		buf[BUFF_SIZE + 1];
+	int			ret;
 
 	if (!line || fd < 0)
 		return (-1);

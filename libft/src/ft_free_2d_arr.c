@@ -6,17 +6,17 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 07:29:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/07 07:31:23 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:23:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void    ft_free_2d_arr(void **line)
+void	ft_free_2d_arr(void **line)
 {
-    int	i;
+	int	i;
 
-   	i = -1;
-    while (line[++i])
-        free(line[i]);
+	i = -1;
+	while (line[++i])
+		free(line[i]);
 }

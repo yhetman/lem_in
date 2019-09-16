@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 19:54:52 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/14 20:01:42 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:22:17 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	ft_isdash(char check)
 {
 	if (check == '-')
-        return (true);
-    else
-        return (false);
+		return (true);
+	else
+		return (false);
 }

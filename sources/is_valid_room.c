@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:33:26 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 22:18:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:33:16 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static bool         check_name_in_list(t_room *map, char *room)
+static bool		check_name_in_list(t_room *map, char *room)
 {
 	while (map)
 	{
@@ -23,9 +23,9 @@ static bool         check_name_in_list(t_room *map, char *room)
 	return (false);
 }
 
-static bool		    find_start_and_end(t_lemin *lemin,
-                    char *name, char type)
-{   
+static bool		find_start_and_end(t_lemin *lemin,
+				char *name, char type)
+{
 	if (type == FINISH)
 	{
 		if (lemin->end_name)
@@ -49,8 +49,8 @@ static bool		    find_start_and_end(t_lemin *lemin,
 
 static void		free_splitted(char **split)
 {
-	char	**temp;
-	char	**back;
+	char		**temp;
+	char		**back;
 
 	if (!split)
 		return ;
@@ -65,11 +65,11 @@ static void		free_splitted(char **split)
 	ft_memdel((void**)&back);
 }
 
-static t_coord		remember_coords(char *input)
+static t_coord	remember_coords(char *input)
 {
-	int				i;
-	char			**splitted;
-	t_coord			coord;
+	int			i;
+	char		**splitted;
+	t_coord		coord;
 
 	ft_bzero((void*)&coord, sizeof(t_coord));
 	splitted = ft_strsplit(input, ' ');
@@ -85,11 +85,11 @@ static t_coord		remember_coords(char *input)
 	return (coord);
 }
 
-bool			    is_valid_room(t_lemin **lemin, char *input, char type)
+bool			is_valid_room(t_lemin **lemin, char *input, char type)
 {
-	t_room			*new;
-	char			*room_name;
-	t_coord			coord;
+	t_room		*new;
+	char		*room_name;
+	t_coord		coord;
 
 	room_name = find_the_links(input);
 	if (!room_name)

@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:53:56 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/12 20:27:21 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:03:30 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static int				next_node(t_lst *node)
+static int		next_node(t_lst *node)
 {
 	t_dead_end	*dead;
 
@@ -25,13 +25,14 @@ static int				next_node(t_lst *node)
 	return (dead->depth);
 }
 
-static int      alternative_way(t_send *sender)
+static int		alternative_way(t_send *sender)
 {
-	t_path      elem;
-	t_lst       *ptr;
+	t_path		elem;
+	t_lst		*ptr;
 
 	ptr = sender->traffic_jam->next;
-	ft_memcpy(&elem, sender->traffic_jam->content, sender->traffic_jam->content_size);
+	ft_memcpy(&elem, sender->traffic_jam->content,
+			sender->traffic_jam->content_size);
 	ft_lstdelone(&sender->traffic_jam, &ft_free_node);
 	sender->traffic_jam = ptr;
 	if (sender->ants[elem.post_code] > 0)
@@ -44,9 +45,9 @@ static int      alternative_way(t_send *sender)
 	return (elem.traffic->depth);
 }
 
-static char			*check_guest_list(t_lemin *lemin, int room_nb)
+static char		*check_guest_list(t_lemin *lemin, int room_nb)
 {
-	t_room *tmp_rooms;
+	t_room		*tmp_rooms;
 
 	tmp_rooms = lemin->amount_of_rooms;
 	while (room_nb--)
@@ -54,10 +55,10 @@ static char			*check_guest_list(t_lemin *lemin, int room_nb)
 	return (tmp_rooms->name);
 }
 
-bool	send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s)
+bool			send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s)
 {
-	int		wait;
-	bool	departed;
+	int			wait;
+	bool		departed;
 
 	departed = (s->positions[i] == lemin->begin);
 	if (lemin->flow > 1 && departed)
@@ -67,7 +68,7 @@ bool	send_one_ant(t_lst *node, t_lemin *lemin, int i, t_send *s)
 	else
 		wait = next_node(node);
 	ft_printf("%s%d%c%s", "L", i + 1, '-', check_guest_list(lemin, wait));
-    (i + 1 == s->departed) ? 0 : ft_putchar_fd(' ', STD_OUT);
+	(i + 1 == s->departed) ? 0 : ft_putchar_fd(' ', STD_OUT);
 	s->positions[i] = wait;
 	return ((wait == lemin->finish) ? true : false);
 }

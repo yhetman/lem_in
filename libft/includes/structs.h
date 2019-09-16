@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:16:42 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:23:27 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:08:40 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct		s_buffer
 	int				fd;
 	int				printed;
 }					t_buffer;
-
 
 typedef struct		s_gnl
 {

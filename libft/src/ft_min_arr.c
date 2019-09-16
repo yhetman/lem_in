@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:43:08 by yhetman           #+#    #+#             */
-/*   Updated: 2019/08/16 18:45:44 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:28:37 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_min_arr(int *arr, int size)
+int			ft_min_arr(int *arr, int size)
 {
 	int		i;
 	int		min;

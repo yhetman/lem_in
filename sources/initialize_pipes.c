@@ -6,14 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:46:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/11 20:48:17 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:05:36 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/lem_in.h"
 
-void	clean_pipes(char **split)
+static void	clean_pipes(char **split)
 {
 	char	**temp;
 	char	**ptr;
@@ -31,9 +30,9 @@ void	clean_pipes(char **split)
 	ft_memdel((void**)&ptr);
 }
 
-static int  numeration_of_rooms(char *name, t_room *amount_of_rooms)
+static int	numeration_of_rooms(char *name, t_room *amount_of_rooms)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (amount_of_rooms)
@@ -57,9 +56,11 @@ static bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 		*ptr = (*ptr)->next;
 		return (false);
 	}
-	rooms_to_connect[0] = numeration_of_rooms(*split[0], lemin->amount_of_rooms);
+	rooms_to_connect[0] = numeration_of_rooms(*split[0],
+			lemin->amount_of_rooms);
 	if (rooms_to_connect[0] != -1)
-		rooms_to_connect[1] = numeration_of_rooms((*split)[1], lemin->amount_of_rooms);
+		rooms_to_connect[1] = numeration_of_rooms((*split)[1],
+				lemin->amount_of_rooms);
 	if (rooms_to_connect[0] == -1 || rooms_to_connect[1] == -1)
 	{
 		clean_pipes(*split);
@@ -72,7 +73,7 @@ static bool	parse_pipes(t_lst **ptr, char ***split, t_lemin *lemin)
 
 void		initialize_pipes(t_lemin *lemin, t_lst **ptr)
 {
-	char        **split;
+	char	**split;
 
 	while (*ptr)
 	{

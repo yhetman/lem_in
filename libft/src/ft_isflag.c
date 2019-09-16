@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 18:21:14 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/18 18:27:32 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:23:03 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-bool		ft_isflag(const char *arg)
+bool	ft_isflag(const char *arg)
 {
 	if (!arg || *arg != '-')
 		return (0);

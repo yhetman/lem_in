@@ -6,13 +6,13 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 16:16:59 by yhetman           #+#    #+#             */
-/*   Updated: 2019/06/06 16:26:20 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:21:29 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int ft_is_integer(const char *arg)
+int				ft_is_integer(const char *arg)
 {
 	intmax_t	tmp;
 	size_t		len;

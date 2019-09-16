@@ -6,12 +6,12 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 20:20:45 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/01 19:20:05 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:08:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
-#define MACROS_H
+# define MACROS_H
 
 # define STD_IN		    (0)
 # define STD_OUT		(1)
