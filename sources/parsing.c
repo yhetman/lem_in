@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:07:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/09/16 15:55:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/16 16:50:59 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ void				parsing(t_lst **input, t_lst **tmp,
 	if (!(*input))
 		shut_down_lemin(tmp, lemin, "ERROR OCCURED: incorrect input.\n", FAIL);
 	if (!(remember_ants(input, &lemin->ants)))
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED:
-				invalid input of ants.\n", FAIL);
+		shut_down_lemin(tmp, lemin,
+				"ERROR OCCURED:invalid input of ants.\n", FAIL);
 	*input = (*input)->next;
 	remember_rooms(input, lemin);
 	if (!lemin->amount_of_rooms)
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED:
-				invalid amount of rooms.\n", FAIL);
+		shut_down_lemin(tmp, lemin,
+				"ERROR OCCURED:invalid amount of rooms.\n", FAIL);
 	if (!lemin->start_name)
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED:
-				map has no start room.\n", FAIL);
+		shut_down_lemin(tmp, lemin,
+				"ERROR OCCURED:map has no start room.\n", FAIL);
 	if (!lemin->end_name)
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED:
-				map has no end room.\n", FAIL);
+		shut_down_lemin(tmp, lemin,
+				"ERROR OCCURED:map has no end room.\n", FAIL);
 	if (!remember_pipes(input, lemin))
-		shut_down_lemin(tmp, lemin, "ERROR OCCURED:
-				wrong declaration of rooms or links.\n", FAIL);
+		shut_down_lemin(tmp, lemin,
+				"ERROR OCCURED:wrong declaration of rooms or links.\n", FAIL);
 }

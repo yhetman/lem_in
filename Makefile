@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/29 14:18:45 by yhetman           #+#    #+#              #
-#    Updated: 2019/09/12 19:35:56 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/16 16:49:01 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS	:=	-Wall -Wextra -Werror
 LIBDIR	:=	./libft
 LIBFT	:=	$(LIBDIR)/libft.a
 BFLAGS	:=	-I$(LIBDIR)/ -Iinclude
-DEBUG	:=	-g3 -fsanitize=address -fsanitize=undefined -Og
+DEBUG	:=	-g3 -fsanitize=address -fsanitize=undefined
 INCLUDE	:=	-lft -L$(LIBDIR)/
 NAME	:=	lem-in
 SRC_PATH		= 	./sources/
@@ -58,6 +58,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(DEPS)
 
 $(NAME): $(DEPS) $(LIBFT) $(OBJ) $(MAINO)
 	$(CC) $(CFLAGS) $(BFLAGS) $(INCLUDE) $(OBJ) $(MAINO) -o $@
+
 clean:
 	$(MAKE) clean -C $(LIBDIR)
 	$(RM) $(OBJ)
@@ -69,7 +70,7 @@ fclean: clean
 	$(RM) tags
 
 re: fclean all
-
+ 
 force:
-	@true 
-.PHONY: all, re, clean, fclean, force
+	@true
+.PHONY: all, re, clean, fclean
